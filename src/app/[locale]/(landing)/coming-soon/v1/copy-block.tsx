@@ -21,7 +21,7 @@ export const CopyBlock = () => {
           })}
         </Heading>
       </div>
-      <p className="text-pretty">
+      <p className="text-pretty text-lg font-normal md:font-light md:tracking-wider">
         {t.rich("subheader", {
           br: () => <br />,
         })}

@@ -17,7 +17,7 @@ export const Heading = ({
     <h1
       className={cn(
         "text-pretty tracking-wide",
-        locale === "fa" ? "text-4xl font-thuluth" : "text-3xl font-stixTwoText",
+        locale === "fa" ? "text-4xl font-thuluth md:text-5xl" : "text-3xl font-stixTwoText md:text-4xl",
         className
       )}
       {...props}

@@ -7,7 +7,7 @@ declare const messages: {
     "about": "Go to the about page"
   },
   "PracticalCopy": {
-    "header": "Dinner? <nosplit>Already handled.</nosplit>",
+    "header": "Dinner? <nosplit>Already handled</nosplit>",
     "subheader": "Weekly Persian meals, chef-prepared and delivered to your door.<br></br>No planning, no cooking, no stress."
   },
   "EmotionalCopy": {
