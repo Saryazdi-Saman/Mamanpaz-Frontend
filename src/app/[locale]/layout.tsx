@@ -23,7 +23,7 @@ const stixTwoText = STIX_Two_Text({
 const lato = Lato({
   subsets: ["latin"],
   style: ["italic", "normal"],
-  weight: ["100", "400", "700"],
+  weight: ["100", "300", "400", "700"],
   variable: "--font-lato",
   display: "swap",
 });

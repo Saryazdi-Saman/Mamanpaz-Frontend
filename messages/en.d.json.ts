@@ -20,6 +20,11 @@ declare const messages: {
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
+  },
+  "CTAv1": {
+    "button": "Join the waitlist",
+    "hook": "{count, number} people signed up",
+    "announcement": "Toronto - {day, number} days, {hour, number} hours until launch"
   }
 };
 export default messages;

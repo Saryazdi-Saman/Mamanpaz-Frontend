@@ -13,14 +13,10 @@ export const Heading = ({
   locale,
   ...props
 }: HeadingProps) => {
-  const fontFamily = {
-    fa: "font-thuluth",
-    en: "font-stixTwoText",
-  };
   return (
     <h1
       className={cn(
-        "sm:text-5xl text-pretty tracking-wide",
+        "text-pretty tracking-wide",
         locale === "fa" ? "text-4xl font-thuluth" : "text-3xl font-stixTwoText",
         className
       )}

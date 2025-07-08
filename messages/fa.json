@@ -17,5 +17,10 @@
   "LocaleSwitcher": {
     "label": "تغییر زبان",
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {English 🇨🇦} other {Unknown}}"
+  },
+  "CTAv1": {
+    "button": "ثبت‌نام",
+    "hook": "{count, number} ثبت‌نام کردن",
+    "announcement": "تورنتو - {day, number} روز٬ {hour, number} ساعت تا افتتاح"
   }
 }
