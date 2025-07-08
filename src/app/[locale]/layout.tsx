@@ -86,7 +86,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       dir={locale === "fa" ? "rtl" : "ltr"}
     >
       <body
-        className={`${fontClasses} ${bodyFont} flex h-full w-screen flex-col antialiased`}
+        className={`${fontClasses} ${bodyFont} flex h-full w-screen flex-col antialiased tracking-wide`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
