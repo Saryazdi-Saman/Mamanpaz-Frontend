@@ -1,0 +1,21 @@
+{
+  "name": "Mamanpaz Meals",
+  "short_name": "MamPaz",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#1D214E",
+  "background_color": "#1D214E",
+  "display": "standalone"
+}
