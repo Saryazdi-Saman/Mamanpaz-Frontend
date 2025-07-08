@@ -4,7 +4,7 @@ import { HTMLAttributes } from "react";
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   children?: React.ReactNode;
-  locale: (typeof routing.locales)[number];
+  locale: string;
 }
 
 export const Heading = ({
@@ -20,7 +20,8 @@ export const Heading = ({
   return (
     <h1
       className={cn(
-        "text-4xl sm:text-5xl text-pretty tracking-wide",
+        "sm:text-5xl text-pretty tracking-wide",
+        locale === "fa" ? "text-4xl font-thuluth" : "text-3xl font-stixTwoText",
         className
       )}
       {...props}

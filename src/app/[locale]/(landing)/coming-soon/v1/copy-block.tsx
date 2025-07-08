@@ -1,0 +1,31 @@
+import { Heading } from "@/components/heading";
+import { useLocale, useTranslations } from "next-intl";
+
+export const CopyBlock = () => {
+  const t = useTranslations("PracticalCopy");
+  const locale = useLocale();
+
+  return (
+    <div className="space-y-3">
+      <div className="-space-y-2">
+        {locale !== "fa" && (
+          <p dir="rtl" className="font-thuluth text-3xl">
+            شامو بسپار به ما
+          </p>
+        )}
+        <Heading locale={locale}>
+          {t.rich("header", {
+            nosplit: (chunks) => (
+              <span className="whitespace-nowrap">{chunks}</span>
+            ),
+          })}
+        </Heading>
+      </div>
+      <p className="text-pretty">
+        {t.rich("subheader", {
+          br: () => <br />,
+        })}
+      </p>
+    </div>
+  );
+};

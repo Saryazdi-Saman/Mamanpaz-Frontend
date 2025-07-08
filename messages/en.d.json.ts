@@ -6,6 +6,14 @@ declare const messages: {
     "title": "Hi from Mamanpaz",
     "about": "Go to the about page"
   },
+  "PracticalCopy": {
+    "header": "Dinner? <nosplit>Already handled.</nosplit>",
+    "subheader": "Weekly Persian meals, chef-prepared and delivered to your door.<br></br>No planning, no cooking, no stress."
+  },
+  "EmotionalCopy": {
+    "header": "Feels like home, tastes like love.",
+    "subheader": "Weekly Persian meals, planned and prepared like mom would — enjoy comfort without the cooking."
+  },
   "LocaleLayout": {
     "title": "Mamanpaz meals"
   },

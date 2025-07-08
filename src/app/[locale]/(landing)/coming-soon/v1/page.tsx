@@ -1,10 +1,12 @@
-import { use } from "react";
-import { setRequestLocale } from "next-intl/server";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
+import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import { use } from "react";
 
-export default function HomePage({
+import MomSketchHero from '@/../public/MomSketchHero.svg'
+import { CopyBlock } from "./copy-block";
+
+export default function V1({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -16,11 +18,15 @@ export default function HomePage({
 
   const t = useTranslations("HomePage");
   return (
-    <div>
-      <MaxWidthWrapper>
-        <h1>{t("title")}</h1>
-        <Link href="/about">{t("about")}</Link>
+    <section className="w-full h-svh bg-brand-navy">
+      <MaxWidthWrapper className="text-white">
+        <div data-type="copy-box" className=" w-full h-full flex flex-col-reverse items-center py-5 px-4 gap-5">
+          <div className="w-full h-3/5">
+            <CopyBlock />
+          </div>
+          <MomSketchHero className="h-2/5"/>
+        </div>
       </MaxWidthWrapper>
-    </div>
+    </section>
   );
 }
