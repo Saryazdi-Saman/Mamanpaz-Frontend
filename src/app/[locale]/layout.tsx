@@ -9,6 +9,11 @@ import localFont from "next/font/local";
 import { Metadata } from "next";
 import Script from "next/script";
 
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: Locale }>;
+};
+
 const stixTwoText = STIX_Two_Text({
   subsets: ["latin"],
   variable: "--font-stix-two-text",
@@ -34,11 +39,6 @@ const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
   display: "swap",
 });
-
-type Props = {
-  children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

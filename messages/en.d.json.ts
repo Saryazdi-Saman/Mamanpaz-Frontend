@@ -8,6 +8,10 @@ declare const messages: {
   },
   "LocaleLayout": {
     "title": "Mamanpaz meals"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
   }
 };
 export default messages;

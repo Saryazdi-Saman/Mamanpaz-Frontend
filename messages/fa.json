@@ -5,5 +5,9 @@
   },
   "LocaleLayout": {
     "title": "مامان پز"
+  },
+  "LocaleSwitcher": {
+    "label": "تغییر زبان",
+    "locale": "{locale, select, fa {🇮🇷 فارسی} en {English 🇨🇦} other {Unknown}}"
   }
 }

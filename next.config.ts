@@ -9,6 +9,14 @@ const withNextIntl = createNextIntlPlugin({
 
 const nextConfig: NextConfig = {
   /* config options here */
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      }
+    }
+  }
 };
 
 export default withNextIntl(nextConfig);
