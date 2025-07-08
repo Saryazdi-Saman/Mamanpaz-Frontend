@@ -74,10 +74,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   // const fontClasses =  `${decoTypeThuluth.variable} ${vazirmatn.variable} ${stixTwoText.variable} ${lato.variable}`
 
   const bodyFont = locale === "fa" ? "font-vazir" : "font-lato";
-  const fontClasses =
-    locale === "fa"
-      ? `${decoTypeThuluth.variable} ${vazirmatn.variable}`
-      : `${stixTwoText.variable} ${lato.variable} ${decoTypeThuluth}`;
+  const fontClasses =`${decoTypeThuluth.variable} ${vazirmatn.variable} ${stixTwoText.variable} ${lato.variable} ${decoTypeThuluth}`;
 
   return (
     <html
