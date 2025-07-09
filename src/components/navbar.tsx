@@ -1,11 +1,11 @@
+import { cn } from "@/lib/utils";
 import { useLocale } from "next-intl";
-import MamanpazIcon from "../../public/MamanpazIcon.svg";
-import MamanpazWordmark from "../../public/MamanpazWordmark.svg";
 import LocaleSwitcher from "./locale-switcher";
 import { MaxWidthWrapper } from "./max-width-wrapper";
-import { cn } from "@/lib/utils";
+import MamanpazIcon from "@/../public/MamanpazIcon.svg";
+import MamanpazWordmark from "@/../public/MamanpazWordmark.svg"
 
-export const Navbar = () => {
+export default function Navbar(){
     // setRequestLocale(locale)
     const locale = useLocale()
   return (

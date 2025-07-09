@@ -18,7 +18,6 @@ export function middleware(req: NextRequest) {
   // Then pass the i18n response to path assignment middleware
   const finalResponse = comingSoonRoutingMiddleware(req, i18nResponse);
 
-  console.log(finalResponse);
   return finalResponse;
 }
 

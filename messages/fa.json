@@ -20,7 +20,7 @@
   },
   "CTAv1": {
     "button": "ثبت‌نام",
-    "hook": "{count, number} ثبت‌نام کردن",
+    "hook": "{count, number} نفر ثبت‌نام کردن",
     "announcement": "تورنتو - {day, number} روز٬ {hour, number} ساعت تا افتتاح"
   }
 }

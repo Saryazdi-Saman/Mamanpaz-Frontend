@@ -2,7 +2,8 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 
-import MomSketchHero from "@/../public/MomSketchHero.svg";
+import MomSketchHero from "@/../public/MomSketchHero.svg"
+
 import { CopyBlock } from "./copy-block";
 import { CTA } from "./cta";
 
