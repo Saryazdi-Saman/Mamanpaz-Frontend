@@ -1,11 +1,8 @@
-import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export const CTA = () => {
-  const locale = useLocale();
   const t = useTranslations("CTAv1");
-
 
   return (
     <div

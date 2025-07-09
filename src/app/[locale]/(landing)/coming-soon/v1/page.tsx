@@ -1,5 +1,4 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 
@@ -16,8 +15,6 @@ export default function V1({
 
   // Enable static rendering
   setRequestLocale(locale);
-
-  const t = useTranslations("HomePage");
   return (
     <section className="w-full h-svh bg-brand-navy">
       <MaxWidthWrapper className="text-white">
