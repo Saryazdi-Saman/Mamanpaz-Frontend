@@ -7,35 +7,27 @@ export const CTA = () => {
 
   return (
     <div
-      className="
-      w-full flex flex-col items-stretch gap-2
-    md:w-fit"
+      className=" w-full flex flex-col items-stretch gap-3 "
     >
-      <p>
-        {t("announcement", {
-          day: 40,
-          hour: 18,
-        })}
-      </p>
-      <p className="text-pretty">{t("hook", { count: 274 })}</p>
-      <div className="flex gap-2">
+      {/* <p className="text-pretty text-lg tracking-normal pb-0.5 font-normal">{t("hook")}</p> */}
+      {/* <div className="flex gap-2"> */}
         <Input
-          className="w-2/3 border-brand-teal ring-brand-teal selection:text-brand-navy  text-background selection:bg-brand-teal"
+          className="ring-brand-teal selection:text-background text-background selection:bg-brand-teal"
           type="text"
           placeholder="Name"
         />
         <Input
-          className="w-1/3  border-brand-teal ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
+          className="ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
           type="text"
           placeholder="Postal Code"
         />
-      </div>
+      {/* </div> */}
       <Input
         type="tel"
-        className=" border-brand-teal ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
+        className=" ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
         placeholder="Phone number"
       />
-      <Button size="lg" className="text-lg font-bold h-11">
+      <Button size="lg" className="text-lg font-bold h-14">
         {t("button")}
       </Button>
       <div className="text-sm opacity-70 tracking-wide"></div>

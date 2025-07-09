@@ -20,8 +20,14 @@
   },
   "CTAv1": {
     "button": "ثبت‌نام",
-    "hook": "{count, number} نفر ثبت‌نام کردن",
-    "announcement": "تورنتو - {day, number} روز٬ {hour, number} ساعت تا افتتاح"
+    "hook": "هنوز برای تو هم جا هست"
+  },
+  "SocialProof": {
+    "memberCount": "{count,number}",
+    "members": "نفر ثبت‌نام کردن",
+    "countdown": "شمارش معکوس تورنتو",
+    "hook": "هنوز برای تو هم جا هست",
+    "timerFormat": "{day, number}روز٬ {hour, number}ساعت"
   },
   "Manifest": {
     "name": "مامان پز"

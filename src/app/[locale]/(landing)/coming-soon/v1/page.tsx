@@ -6,6 +6,7 @@ import MomSketchHero from "@/../public/MomSketchHero.svg"
 
 import { CopyBlock } from "./copy-block";
 import { CTA } from "./cta";
+import SocialProof from "./social-proof";
 
 export default function V1({
   params,
@@ -18,19 +19,20 @@ export default function V1({
   setRequestLocale(locale);
   return (
     <section className="w-full min-h-[calc(100vh-4rem)] bg-brand-navy">
-      <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-center">
+      <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-start md:items-center">
         <div
           data-type="hero-layout"
-          className=" w-full flex flex-col-reverse items-center py-8 px-4 justify-center gap-8
+          className=" w-full flex flex-col-reverse items-center py-4 px-4 justify-start
           md:flex-row md:gap-16 md:justify-between
           landscape:py-4 landscape:gap-4"
         >
-          <div data-type="copy-box" className="w-full h-fit space-y-16
-          md:w-3/5 lg:w-1/2 landscape:space-y-16">
+          <div data-type="copy-box" className="w-full h-fit space-y-8 bg-brand-navy/10 backdrop-blur-sm py-2
+          md:w-3/5 lg:w-2/5 landscape:space-y-16">
             <CopyBlock />
+            <SocialProof />
             <CTA />
           </div>
-          <MomSketchHero className="h-64 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " />
+          <MomSketchHero className="h-52 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " />
         </div>
       </MaxWidthWrapper>
     </section>

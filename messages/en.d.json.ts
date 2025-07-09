@@ -23,8 +23,14 @@ declare const messages: {
   },
   "CTAv1": {
     "button": "Join the waitlist",
-    "hook": "{count, number} people have joined - There is room for you too",
-    "announcement": "Countdown Toronto - {day, number} days, {hour, number} hours"
+    "hook": "Join the waitlist – We saved a spot for you."
+  },
+  "SocialProof": {
+    "memberCount": "{count,number}",
+    "members": "have joined us",
+    "countdown": "Toronto launch in:",
+    "hook": "There is still room for you too",
+    "timerFormat": "{day, number} days, {hour, number} hours"
   },
   "Manifest": {
     "name": "Mamanpaz Meals"
