@@ -19,16 +19,18 @@ export const CTA = () => {
           required
           minLength={3}
           maxLength={150}
+          autoComplete="name"
           className="ring-brand-teal selection:text-background text-background selection:bg-brand-teal"
           type="text"
         />
         <Input
           id='zip'
           name='zip'
+          placeholder={t("postCode")}
           required
           minLength={6}
           maxLength={6}
-          placeholder={t("postCode")}
+          autoComplete="postal-code"
           className="ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
           type="text"
         />
@@ -36,8 +38,9 @@ export const CTA = () => {
       <Input
         id='phone'
         name='phone'
-        required
         placeholder={t("phone")}
+        required
+        autoComplete="tel"
         type="tel"
         className=" ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
       />
