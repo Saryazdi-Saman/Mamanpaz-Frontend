@@ -17,7 +17,7 @@ export default function V1({
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <section className="w-full h-svh bg-brand-navy">
+    <section className="w-dvw h-dvh bg-brand-navy">
       <MaxWidthWrapper className="text-white">
         <div
           data-type="hero-layout"

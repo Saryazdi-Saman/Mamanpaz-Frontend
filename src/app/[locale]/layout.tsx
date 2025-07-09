@@ -57,6 +57,19 @@ export async function generateMetadata(
     appleWebApp: {
       title: "Mamanpaz",
     },
+    robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   };
 }
 
@@ -78,12 +91,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html
-      className="h-full"
+      className="h-dvh"
       lang={locale}
       dir={locale === "fa" ? "rtl" : "ltr"}
     >
       <body
-        className={`${fontClasses} ${bodyFont} flex h-full w-dvw flex-col antialiased tracking-wide`}
+        className={`${fontClasses} ${bodyFont} flex h-dvh w-dvw flex-col antialiased tracking-wide`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
