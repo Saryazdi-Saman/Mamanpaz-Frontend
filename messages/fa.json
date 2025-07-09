@@ -20,12 +20,15 @@
   },
   "CTAv1": {
     "button": "ثبت‌نام",
-    "hook": "هنوز برای تو هم جا هست"
+    "hook": "هنوز برای تو هم جا هست",
+    "name": "نام",
+    "postCode": "کد پستی",
+    "phone": "شماره تلفن"
   },
   "SocialProof": {
     "memberCount": "{count,number}",
-    "members": "نفر ثبت‌نام کردن",
-    "countdown": "شمارش معکوس تورنتو",
+    "members": "در لیست انتظار",
+    "countdown": "آغاز در تورنتو٬ در:",
     "hook": "هنوز برای تو هم جا هست",
     "timerFormat": "{day, number}روز٬ {hour, number}ساعت"
   },

@@ -23,11 +23,14 @@ declare const messages: {
   },
   "CTAv1": {
     "button": "Join the waitlist",
-    "hook": "Join the waitlist – We saved a spot for you."
+    "hook": "Join the waitlist – We saved a spot for you.",
+    "name": "Name",
+    "postCode": "Postal code",
+    "phone": "Phone number"
   },
   "SocialProof": {
     "memberCount": "{count,number}",
-    "members": "have joined us",
+    "members": "are on waitlist",
     "countdown": "Toronto launch in:",
     "hook": "There is still room for you too",
     "timerFormat": "{day, number} days, {hour, number} hours"
