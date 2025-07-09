@@ -18,12 +18,12 @@
     "label": "تغییر زبان",
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {English 🇨🇦} other {Unknown}}"
   },
-  "CTAv1": {
+  "WaitlistForm": {
     "button": "ثبت‌نام",
-    "hook": "هنوز برای تو هم جا هست",
     "name": "نام",
     "postCode": "کد پستی",
-    "phone": "شماره تلفن"
+    "phone": "شماره تلفن",
+    "phoneValidation": "شماره تلفن باید ۱۰ رقم باشد"
   },
   "SocialProof": {
     "memberCount": "{count,number}",

@@ -18,13 +18,14 @@
     "label": "Change language",
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
   },
-  "CTAv1": {
+  "WaitlistForm": {
     "button": "Join the waitlist",
-    "hook": "Join the waitlist – We saved a spot for you.",
     "name": "Name",
     "postCode": "Postal code",
-    "phone": "Phone number"
+    "phone": "Phone number",
+    "phoneValidation": "Enter a 10-digit phone number"
   },
+  
   "SocialProof": {
     "memberCount": "{count,number}",
     "members": "are on waitlist",
