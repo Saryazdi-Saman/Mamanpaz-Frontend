@@ -1,4 +1,4 @@
-export function formatPhoneNumberInput(value: string): string {
+export function phoneDisplayFormat(value: string): string {
   // Strip all non-digit characters
   const digits = value.replace(/\D/g, '');
 

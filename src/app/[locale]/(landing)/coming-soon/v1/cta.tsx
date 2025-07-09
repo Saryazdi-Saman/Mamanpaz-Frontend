@@ -1,51 +1,113 @@
-'use client'
+"use client";
+import { SubmitWaitlistRequest } from "@/actions/waitlist";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { formatPhoneNumberInput } from "@/lib/format-phone-number-input";
-import { normalizeDigits } from "@/lib/normalize-digits";
+import { phoneDisplayFormat } from "@/lib/phone-display-format";
+import { postalCodeDisplayFormat } from "@/lib/postal-code-display-format";
+import { normalizeFarsiDigits } from "@/lib/normalize-farsi-digits";
+import { ActionResponse } from "@/types/waitlist";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useActionState, useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+
+const initialState: ActionResponse = {
+  success: false,
+  message: "",
+};
+
+const validateAndFormatPostCode = (raw: string) => {
+  let formatted = "";
+
+  for (let i = 0; i < raw.length && formatted.length < 7; i++) {
+    const char = raw[i];
+    const pos = formatted.replace(" ", "").length; // Position ignoring space
+
+    // Canadian postal code pattern: A1A 1A1
+    if (pos === 0 || pos === 2 || pos === 4) {
+      // Positions 0, 2, 4 should be letters
+      if (/[A-Z]/.test(char)) {
+        formatted += char;
+        if (pos === 2) formatted += " "; // Add space after A1A
+      }
+    } else if (pos === 1 || pos === 3 || pos === 5) {
+      // Positions 1, 3, 5 should be digits
+      if (/[0-9]/.test(char)) {
+        formatted += char;
+      }
+    }
+  }
+
+  return formatted
+};
 
 export const CTA = () => {
   const t = useTranslations("WaitlistForm");
 
-  const [phoneInput, setPhoneInput] = useState("")
+  const [phoneInput, setPhoneInput] = useState("");
+  const [postalCodeInput, setPostalCodeInput] = useState("");
+
+  const [state, action, isPending] = useActionState(
+    SubmitWaitlistRequest,
+    initialState
+  );
+
+  // Update inputs when server returns validation errors with preserved input
+  useEffect(() => {
+    const digits = state.inputs?.phone ?? "";
+    setPhoneInput(digits);
+
+    const post = state.inputs?.zip ?? "";
+    setPostalCodeInput(post);
+  }, [state]);
 
   return (
     <form
+      action={action}
       className=" w-full flex flex-col items-stretch gap-3 "
       autoComplete="on"
     >
-      {/* <p className="text-pretty text-lg tracking-normal pb-0.5 font-normal">{t("hook")}</p> */}
-      {/* <div className="flex gap-2"> */}
       <Input
         id="name"
         name="name"
         placeholder={t("name")}
+        defaultValue={state.inputs?.name}
         required
-        minLength={3}
-        maxLength={150}
+        minLength={2}
+        maxLength={100}
         autoComplete="name"
-        className="ring-brand-teal selection:text-background text-background selection:bg-brand-teal"
+        className={cn(
+          "ring-brand-teal selection:text-background text-background selection:bg-brand-teal",
+          state.errors?.name ? "border-red-500" : ""
+        )}
         type="text"
       />
+
       <Input
         id="zip"
         name="zip"
         placeholder={t("postCode")}
+        value={postalCodeInput}
         required
-        minLength={6}
-        maxLength={6}
         autoComplete="postal-code"
-        className="ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
+        pattern="^[A-Z]\d[A-Z] \d[A-Z]\d$"
+        title="Enter a valid Canadian postal code (e.g. M5V 3A8)"
+        onInput={(e) => {
+          const raw = e.currentTarget.value.toUpperCase();
+          const formatted = validateAndFormatPostCode(raw)
+          setPostalCodeInput(formatted);
+        }}
+        className={cn(
+          "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+          state.errors?.zip ? "border-red-500" : ""
+        )}
         type="text"
       />
-      {/* </div> */}
+
       <Input
         id="phone"
         name="phone"
         placeholder={t("phone")}
-        value={formatPhoneNumberInput(phoneInput)}
+        value={phoneInput}
         required
         title={t("phoneValidation")}
         inputMode="numeric"
@@ -54,13 +116,17 @@ export const CTA = () => {
         autoComplete="tel"
         type="tel"
         onInput={(e) => {
-          const raw = e.currentTarget.value; 
-          const normalized = normalizeDigits(raw); // convert farsi and arabic fonts to latin digits
+          const raw = e.currentTarget.value;
+          const normalized = normalizeFarsiDigits(raw); // convert farsi and arabic fonts to latin digits
           const value = normalized.replace(/\D/g, ""); // remove all none numeric chars
-          setPhoneInput(value)
+          setPhoneInput(phoneDisplayFormat(value)); // Store raw digits for validation
         }}
-        className=" ring-brand-teal selection:text-background  text-background selection:bg-brand-teal"
+        className={cn(
+          "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+          state.errors?.phone ? "border-red-500" : ""
+        )}
       />
+
       <Button size="lg" className="text-lg font-bold h-14">
         {t("button")}
       </Button>
