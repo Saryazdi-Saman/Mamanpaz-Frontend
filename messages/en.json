@@ -20,8 +20,8 @@
   },
   "CTAv1": {
     "button": "Join the waitlist",
-    "hook": "{count, number} people signed up",
-    "announcement": "Toronto - {day, number} days, {hour, number} hours until launch"
+    "hook": "{count, number} people have joined - There is room for you too",
+    "announcement": "Countdown Toronto - {day, number} days, {hour, number} hours"
   },
   "Manifest": {
     "name": "Mamanpaz Meals"
