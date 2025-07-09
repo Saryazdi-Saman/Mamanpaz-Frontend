@@ -9,7 +9,7 @@ export default function Navbar(){
     // setRequestLocale(locale)
     const locale = useLocale()
   return (
-    <nav className="sticky z-[100] h-16 inset-x-0 top-0 w-full bg-brand-navy/90 backdrop-blur-lg transition-all">
+    <nav className="sticky z-[100] h-16 inset-x-0 top-0 w-full bg-brand-navy backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className={cn("flex h-16 items-center justify-between",
           locale === 'fa' ? ' flex-row-reverse' : 'flex-row'
