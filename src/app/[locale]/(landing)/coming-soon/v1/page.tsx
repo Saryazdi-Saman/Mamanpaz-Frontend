@@ -17,8 +17,8 @@ export default function V1({
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <section className="w-full min-h-screen bg-brand-navy">
-      <MaxWidthWrapper className="text-white min-h-screen flex items-center">
+    <section className="w-full min-h-[calc(100vh-4rem)] bg-brand-navy">
+      <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-center landscape:px-0">
         <div
           data-type="hero-layout"
           className=" w-full flex flex-col-reverse items-center py-8 px-4 justify-center gap-8
