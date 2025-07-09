@@ -17,19 +17,20 @@ export default function V1({
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <section className="w-dvw h-dvh bg-brand-navy">
-      <MaxWidthWrapper className="text-white">
+    <section className="w-full min-h-screen bg-brand-navy">
+      <MaxWidthWrapper className="text-white min-h-screen flex items-center">
         <div
           data-type="hero-layout"
-          className=" w-full h-full flex flex-col-reverse items-center py-5 px-4 justify-evenly
-          md:flex-row md:gap-16"
+          className=" w-full flex flex-col-reverse items-center py-8 px-4 justify-center gap-8
+          md:flex-row md:gap-16 md:justify-between
+          landscape:py-4 landscape:gap-4"
         >
           <div data-type="copy-box" className="w-full h-fit space-y-8
-          md:w-3/5">
+          md:w-3/5 landscape:space-y-4">
             <CopyBlock />
             <CTA />
           </div>
-          <MomSketchHero className="h-2/5 md:w-2/5 md:h-auto" />
+          <MomSketchHero className="h-64 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " />
         </div>
       </MaxWidthWrapper>
     </section>
