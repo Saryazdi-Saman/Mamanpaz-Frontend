@@ -22,5 +22,8 @@
     "button": "ثبت‌نام",
     "hook": "{count, number} نفر ثبت‌نام کردن",
     "announcement": "تورنتو - {day, number} روز٬ {hour, number} ساعت تا افتتاح"
+  },
+  "Manifest": {
+    "name": "مامان پز"
   }
 }

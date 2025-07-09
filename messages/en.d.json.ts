@@ -25,6 +25,9 @@ declare const messages: {
     "button": "Join the waitlist",
     "hook": "{count, number} people signed up",
     "announcement": "Toronto - {day, number} days, {hour, number} hours until launch"
+  },
+  "Manifest": {
+    "name": "Mamanpaz Meals"
   }
 };
 export default messages;

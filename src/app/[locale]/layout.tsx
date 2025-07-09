@@ -57,6 +57,10 @@ export async function generateMetadata(
     appleWebApp: {
       title: "Mamanpaz",
     },
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-icon.png',
+    },
     robots: {
     index: true,
     follow: true,
@@ -96,7 +100,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       dir={locale === "fa" ? "rtl" : "ltr"}
     >
       <body
-        className={`${fontClasses} ${bodyFont} flex min-h-dvh w-full flex-col antialiased tracking-wide`}
+        className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
