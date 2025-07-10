@@ -109,6 +109,7 @@ export const WaitlistForm = () => {
                 <TooltipTrigger asChild>
                   <Button
                     type="button"
+                    id="copy-referral-link"
                     ref={copyButtonRef}
                     onClick={() => copyToClipboard(state.referralLink!)}
                     className="group relative w-full text-xs bg-background p-3 rounded border break-all text-brand-navy tracking-tight hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between gap-2"
