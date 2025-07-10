@@ -33,12 +33,12 @@ function convertToBase32(num: bigint): string {
   const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
   const base = BigInt(32);
   
-  if (num === 0n) return '0';
+  if (num === BigInt(0)) return '0';
   
   let result = '';
   let temp = num;
   
-  while (temp > 0n) {
+  while (temp > BigInt(0)) {
     result = alphabet[Number(temp % base)] + result;
     temp = temp / base;
   }
@@ -54,12 +54,12 @@ function convertToBase64(num: bigint): string {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
   const base = BigInt(64);
   
-  if (num === 0n) return 'A';
+  if (num === BigInt(0)) return 'A';
   
   let result = '';
   let temp = num;
   
-  while (temp > 0n) {
+  while (temp > BigInt(0)) {
     result = alphabet[Number(temp % base)] + result;
     temp = temp / base;
   }
@@ -93,7 +93,7 @@ function decodeFromBase32(code: string): bigint {
   const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
   const base = BigInt(32);
   
-  let result = 0n;
+  let result = BigInt(0);
   for (const char of code) {
     const index = alphabet.indexOf(char.toUpperCase());
     if (index === -1) throw new Error(`Invalid character in base32 code: ${char}`);
@@ -107,7 +107,7 @@ function decodeFromBase64(code: string): bigint {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
   const base = BigInt(64);
   
-  let result = 0n;
+  let result = BigInt(0);
   for (const char of code) {
     const index = alphabet.indexOf(char);
     if (index === -1) throw new Error(`Invalid character in base64 code: ${char}`);

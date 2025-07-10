@@ -82,7 +82,7 @@ export async function SubmitWaitlistRequest(
     const referrerInfo = await getReferrerFromCookie();
 
     try {
-      const submit = await sql`
+      await sql`
           INSERT INTO users (
               name, 
               phone, 
@@ -117,9 +117,17 @@ export async function SubmitWaitlistRequest(
         message: "Contact saved successfully!",
         referralLink: `https://www.mamanpazmeals.com?ref=${referralCode}`,
       };
-    } catch (dbError: any) {
+    } catch (dbError: unknown) {
       // Handle duplicate user (unique constraint violation)
-      if (dbError.code === '23505' || dbError.constraint_name?.includes('phone') || dbError.constraint_name?.includes('unique')) {
+      if (
+        dbError && 
+        typeof dbError === 'object' && 
+        'code' in dbError && 
+        (dbError.code === '23505' || 
+         ('constraint_name' in dbError && 
+          typeof dbError.constraint_name === 'string' && 
+          (dbError.constraint_name.includes('phone') || dbError.constraint_name.includes('unique'))))
+      ) {
         return {
           success: true, // Return success because user already exists
           message: "You're already on the waitlist! We'll be in touch soon.",

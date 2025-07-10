@@ -2,13 +2,13 @@
 import { SubmitWaitlistRequest } from "@/actions/waitlist";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { phoneDisplayFormat } from "@/lib/phone-display-format";
-import { postalCodeDisplayFormat } from "@/lib/postal-code-display-format";
 import { normalizeFarsiDigits } from "@/lib/normalize-farsi-digits";
+import { phoneDisplayFormat } from "@/lib/phone-display-format";
+import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
 import { useTranslations } from "next-intl";
-import { useActionState, useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { useActionState, useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const initialState: ActionResponse = {
   success: false,
@@ -75,6 +75,7 @@ export const CTA = () => {
         minLength={2}
         maxLength={100}
         autoComplete="name"
+        enterKeyHint="next"
         className={cn(
           "ring-brand-teal selection:text-background text-background selection:bg-brand-teal",
           state.errors?.name ? "border-red-500" : ""
@@ -91,6 +92,7 @@ export const CTA = () => {
         autoComplete="postal-code"
         pattern="^[A-Z]\d[A-Z] \d[A-Z]\d$"
         title="Enter a valid Canadian postal code (e.g. M5V 3A8)"
+        enterKeyHint="next"
         onInput={(e) => {
           const raw = e.currentTarget.value.toUpperCase();
           const formatted = validateAndFormatPostCode(raw)
@@ -115,6 +117,7 @@ export const CTA = () => {
         pattern="^\(\d{3}\) \d{3}-\d{4}$"
         autoComplete="tel"
         type="tel"
+        enterKeyHint="done"
         onInput={(e) => {
           const raw = e.currentTarget.value;
           const normalized = normalizeFarsiDigits(raw); // convert farsi and arabic fonts to latin digits
@@ -127,8 +130,15 @@ export const CTA = () => {
         )}
       />
 
-      <Button size="lg" className="text-lg font-bold h-14">
-        {t("button")}
+      <Button size="lg" className="text-lg font-bold h-14" disabled={isPending}>
+        {isPending ? (
+          <>
+            <Loader2 className="animate-spin" />
+            {t("button")}
+          </>
+        ) : (
+          t("button")
+        )}
       </Button>
       <div className="text-sm opacity-70 tracking-wide"></div>
     </form>

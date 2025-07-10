@@ -9,6 +9,7 @@ import localFont from "next/font/local";
 import { Metadata } from "next";
 import Script from "next/script";
 import ReferralTracker from "@/components/referral-tracker";
+import { Suspense } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -103,7 +104,9 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body
         className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}
       >
-        <ReferralTracker />
+        <Suspense fallback={null}>
+          <ReferralTracker />
+        </Suspense>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
       {/* Umami tracking script */}

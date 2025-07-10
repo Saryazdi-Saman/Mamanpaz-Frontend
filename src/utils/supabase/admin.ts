@@ -12,7 +12,7 @@ export async function createSupabaseAdminClient() {
         getAll() {
           return cookieStore.getAll()
         },
-        setAll(cookiesToSet) {
+        setAll() {
           // try {
           //   // cookiesToSet.forEach(({ name, value, options }) =>
           //   //   cookieStore.set(name, value, options)
