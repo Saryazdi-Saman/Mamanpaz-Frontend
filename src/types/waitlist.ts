@@ -13,4 +13,5 @@ export type ActionResponse = {
   errors?: {
     [k in keyof WaitlistFormData]?: string[];
   };
+  referralLink?: string;
 };

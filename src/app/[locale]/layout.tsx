@@ -8,6 +8,7 @@ import { Vazirmatn, STIX_Two_Text, Lato } from "next/font/google";
 import localFont from "next/font/local";
 import { Metadata } from "next";
 import Script from "next/script";
+import ReferralTracker from "@/components/referral-tracker";
 
 type Props = {
   children: React.ReactNode;
@@ -102,6 +103,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body
         className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}
       >
+        <ReferralTracker />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
       {/* Umami tracking script */}

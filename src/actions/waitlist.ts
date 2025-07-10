@@ -5,6 +5,7 @@ import { nameSchema, phoneSchema, postalCodeSchema } from "@/schema";
 import { ActionResponse } from "@/types/waitlist";
 import sql from "@/utils/db";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import * as z from "zod/v4";
 
 const waitlistSchema = z.object({
@@ -12,6 +13,44 @@ const waitlistSchema = z.object({
   zip: postalCodeSchema,
   phone: phoneSchema,
 });
+
+/**
+ * Looks up referrer information from the 'ref' cookie
+ * @returns Object with referrer_id and referrer_name, or null if not found
+ */
+async function getReferrerFromCookie(): Promise<{ referrer_id: string; referrer_name: string } | null> {
+  try {
+    const cookieStore = await cookies();
+    const refCookie = cookieStore.get('ref');
+    
+    if (!refCookie?.value) {
+      return null;
+    }
+
+    const referralCode = refCookie.value;
+    
+    // Query database for user with matching referral_code
+    const referrerQuery = await sql`
+      SELECT id, name 
+      FROM users 
+      WHERE referral_code = ${referralCode}
+      LIMIT 1
+    `;
+
+    if (referrerQuery.length === 0) {
+      console.warn(`Referral code '${referralCode}' not found in database`);
+      return null;
+    }
+
+    return {
+      referrer_id: referrerQuery[0].id,
+      referrer_name: referrerQuery[0].name
+    };
+  } catch (error) {
+    console.error('Error looking up referrer:', error);
+    return null;
+  }
+}
 
 export async function SubmitWaitlistRequest(
   prevState: ActionResponse | null,
@@ -38,9 +77,11 @@ export async function SubmitWaitlistRequest(
     }
 
     const referralCode = generateReferralCodeFromPhone(validateData.data.phone.slice(-10));
+    
+    // Look up referrer from cookie
+    const referrerInfo = await getReferrerFromCookie();
 
     try {
-      //TODO -- handle referrer_id
       const submit = await sql`
           INSERT INTO users (
               name, 
@@ -53,14 +94,28 @@ export async function SubmitWaitlistRequest(
               ${validateData.data.phone}, 
               ${validateData.data.zip}, 
               ${referralCode}, 
-              ${null}) 
+              ${referrerInfo?.referrer_id || null}) 
           `;
+
+      // If there's a referrer, log the referral message
+      if (referrerInfo) {
+        try {
+          await sql`
+            INSERT INTO messages (message) 
+            VALUES (${`${referrerInfo.referrer_name} just referred us. Thanks!`})
+          `;
+        } catch (messageError) {
+          // Log error but don't fail the signup if message insert fails
+          console.error('Failed to insert referral message:', messageError);
+        }
+      }
 
       revalidatePath("/[locale]/(landing)/coming-soon", "layout");
 
       return {
         success: true,
         message: "Contact saved successfully!",
+        referralLink: `https://www.mamanpazmeals.com?ref=${referralCode}`,
       };
     } catch (dbError: any) {
       // Handle duplicate user (unique constraint violation)
@@ -68,6 +123,7 @@ export async function SubmitWaitlistRequest(
         return {
           success: true, // Return success because user already exists
           message: "You're already on the waitlist! We'll be in touch soon.",
+          referralLink: `https://www.mamanpazmeals.com?ref=${referralCode}`,
         };
       }
 
