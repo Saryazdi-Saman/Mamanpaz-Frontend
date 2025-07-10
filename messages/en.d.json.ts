@@ -8,7 +8,7 @@ declare const messages: {
   },
   "PracticalCopy": {
     "header": "Dinner? <nosplit>Already handled</nosplit>",
-    "subheader": "Weekly Persian meals, chef-prepared and delivered to your door.<br></br>No planning, no cooking, no stress."
+    "subheader": "Weekly subscription based Persian meals, chef-prepared and delivered to you. <br></br>No planning, no cooking, no stress."
   },
   "EmotionalCopy": {
     "header": "Feels like home, tastes like love.",
@@ -22,19 +22,24 @@ declare const messages: {
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
   },
   "WaitlistForm": {
-    "button": "Join the waitlist",
+    "button": "Join them",
     "name": "Name",
     "postCode": "Postal code",
     "phone": "Phone number",
-    "phoneValidation": "Enter a 10-digit phone number"
+    "phoneValidation": "Enter a 10-digit phone number",
+    "success": "Welcome to the waitlist! We'll be in touch soon.",
+    "duplicate": "You're already on the waitlist! We'll be in touch soon.",
+    "shareText": "Share your referral link:",
+    "copy": "Copy",
+    "copied": "Copied to clipboard!"
   },
   
   "SocialProof": {
     "memberCount": "{count,number}",
-    "members": "are on waitlist",
-    "countdown": "Toronto launch in:",
+    "members": " people are hungry",
+    "countdown": "Toronto",
     "hook": "There is still room for you too",
-    "timerFormat": "{day, number} days, {hour, number} hours"
+    "timerFormat": "Launching in {day, number} days"
   },
   "Manifest": {
     "name": "Mamanpaz Meals"

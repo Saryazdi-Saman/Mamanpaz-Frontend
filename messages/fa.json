@@ -23,14 +23,19 @@
     "name": "نام",
     "postCode": "کد پستی",
     "phone": "شماره تلفن",
-    "phoneValidation": "شماره تلفن باید ۱۰ رقم باشد"
+    "phoneValidation": "شماره تلفن باید ۱۰ رقم باشد",
+    "success": "به لیست انتظار خوش آمدید! به زودی با شما تماس می‌گیریم.",
+    "duplicate": "شما در حال حاضر در لیست انتظار هستید! به زودی با شما تماس می‌گیریم.",
+    "shareText": "لینک معرفی خودتان را به اشتراک بگذارید:",
+    "copy": "کپی",
+    "copied": "کپی شد!"
   },
   "SocialProof": {
     "memberCount": "{count,number}",
     "members": "در لیست انتظار",
-    "countdown": "آغاز در تورنتو٬ در:",
+    "countdown": "تورنتو:",
     "hook": "هنوز برای تو هم جا هست",
-    "timerFormat": "{day, number}روز٬ {hour, number}ساعت٬"
+    "timerFormat": "{day, number} روز تا افتتاح"
   },
   "Manifest": {
     "name": "مامان پز"

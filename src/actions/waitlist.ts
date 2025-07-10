@@ -110,11 +110,21 @@ export async function SubmitWaitlistRequest(
         }
       }
 
+      try {
+          await sql`
+            INSERT INTO messages (message) 
+            VALUES (${`${validateData.data.name} just joined!`})
+          `;
+        } catch (messageError) {
+          // Log error but don't fail the signup if message insert fails
+          console.error('Failed to insert referral message:', messageError);
+        }
+
       revalidatePath("/[locale]/(landing)/coming-soon", "layout");
 
       return {
         success: true,
-        message: "Contact saved successfully!",
+        message: "success",
         referralLink: `https://www.mamanpazmeals.com?ref=${referralCode}`,
       };
     } catch (dbError: unknown) {
@@ -130,7 +140,7 @@ export async function SubmitWaitlistRequest(
       ) {
         return {
           success: true, // Return success because user already exists
-          message: "You're already on the waitlist! We'll be in touch soon.",
+          message: "duplicate",
           referralLink: `https://www.mamanpazmeals.com?ref=${referralCode}`,
         };
       }

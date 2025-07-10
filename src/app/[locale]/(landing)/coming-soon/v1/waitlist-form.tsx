@@ -99,11 +99,11 @@ export const WaitlistForm = () => {
     return (
       <div className="w-full flex items-center justify-center min-h-[200px] bg-brand-teal rounded-sm md:px-3 p-3 animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 ease-out">
         <div className="text-center">
-          <p className="text-xl font-medium text-foreground">{state.message}</p>
+          <p className="text-xl font-medium text-foreground">{t(state.message)}</p>
           {state.referralLink && (
             <div className="mt-4 bg-muted rounded-md">
               <p className="text-sm text-brand-navy/75 mb-2">
-                Share your referral link:
+                {t("shareText")}
               </p>
               <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
                 <TooltipTrigger asChild>
@@ -128,19 +128,12 @@ export const WaitlistForm = () => {
                 </TooltipTrigger>
                 <TooltipContent className="bg-brand-navy text-background">
                   {copied ? (
-                    <p>Copied to clipboard!</p>
+                    <p>{t("copied")}</p>
                   ) : (
-                    <p>Copy</p>
+                    <p>{t("copy")}</p>
                   )}
                 </TooltipContent>
               </Tooltip>
-              {/* <div className="h-4 mt-1 flex items-center bg-amber-300">
-                {copied && (
-                  <p className="text-xs text-green-600 animate-in fade-in-0 duration-300">
-                    Copied to clipboard!
-                  </p>
-                )}
-              </div> */}
             </div>
           )}
         </div>

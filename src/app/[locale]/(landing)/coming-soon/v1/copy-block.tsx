@@ -6,10 +6,10 @@ export const CopyBlock = () => {
   const locale = useLocale();
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 text-center md:text-start">
       <div >
         {locale !== "fa" && (
-          <p dir="rtl" className="font-thuluth text-3xl">
+          <p dir="rtl" className="font-thuluth text-3xl text-center">
             شامو بسپار به ما
           </p>
         )}
@@ -23,7 +23,7 @@ export const CopyBlock = () => {
       </div>
       <p className="text-pretty text-lg font-normal md:font-light md:tracking-wider">
         {t.rich("subheader", {
-          br: () => <br />,
+          br: () => <span></span>,
         })}
       </p>
     </div>
