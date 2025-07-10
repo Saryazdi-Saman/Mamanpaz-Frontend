@@ -30,7 +30,7 @@
     "members": "در لیست انتظار",
     "countdown": "آغاز در تورنتو٬ در:",
     "hook": "هنوز برای تو هم جا هست",
-    "timerFormat": "{day, number}روز٬ {hour, number}ساعت"
+    "timerFormat": "{day, number}روز٬ {hour, number}ساعت٬"
   },
   "Manifest": {
     "name": "مامان پز"
