@@ -34,7 +34,7 @@ export default async function V1({
         >
           <div
             data-type="copy-box"
-            className="w-full h-fit space-y-8 bg-brand-navy pb-4  pt-4 md:py-2
+            className="w-full h-fit space-y-8 bg-brand-navy py-4 z-20 md:py-2
           md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-8 md:mt-0"
           >
             <CopyBlock />
@@ -46,7 +46,7 @@ export default async function V1({
             alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
             width={1024}
             height={1536}
-            className="h-72 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 "
+            className="h-72 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 z-10"
           />
         </div>
       </MaxWidthWrapper>
