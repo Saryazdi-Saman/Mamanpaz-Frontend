@@ -54,28 +54,53 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "LocaleLayout" });
 
   return {
-    title: t("title"),
+    title: {
+      template: `%s | ${t("siteName")}`,
+      default: t("title"),
+    },
+    description: t("description"),
     applicationName: "Mamanpaz",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        en: "/en",
+        fa: "/fa",
+      },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: 'https://www.mamanpazmeals.com',
+      siteName: 'Mamanpaz Meals',
+      locale: locale,
+      type: 'website'
+    },
     appleWebApp: {
       title: "Mamanpaz",
     },
     icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-icon.png',
+      icon: "/favicon.ico",
+      apple: "/apple-icon.png",
     },
     robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
   };
 }
 
@@ -93,17 +118,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   // const fontClasses =  `${decoTypeThuluth.variable} ${vazirmatn.variable} ${stixTwoText.variable} ${lato.variable}`
 
   const bodyFont = locale === "fa" ? "font-vazir" : "font-lato";
-  const fontClasses =`${decoTypeThuluth.variable} ${vazirmatn.variable} ${stixTwoText.variable} ${lato.variable} ${decoTypeThuluth}`;
+  const fontClasses = `${decoTypeThuluth.variable} ${vazirmatn.variable} ${stixTwoText.variable} ${lato.variable} ${decoTypeThuluth}`;
 
   return (
-    <html
-      className="h-dvh"
-      lang={locale}
-      dir={locale === "fa" ? "rtl" : "ltr"}
-    >
-      <body
-        className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}
-      >
+    <html className="h-dvh" lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
+      <body className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}>
         <Suspense fallback={null}>
           <ReferralTracker />
         </Suspense>
