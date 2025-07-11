@@ -110,11 +110,13 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
       {/* Umami tracking script */}
-      <Script
-        defer
-        src="https://cloud.umami.is/script.js"
-        data-website-id="4022d3ad-820b-4a0f-b8f4-53d5ae81107a"
-      />
+      {!!process.env.NEXT_PUBLIC_UMAMI_ID && (
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID}
+        />
+      )}
     </html>
   );
 }
