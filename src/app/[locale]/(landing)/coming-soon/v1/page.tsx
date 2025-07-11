@@ -42,8 +42,9 @@ export default async function V1({
             <CTA />
           </div>
           <Image
-            src="/MomSketchRealisticPlate.png"
+            src="/MomSketchHero.png"
             alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
+            priority
             width={1024}
             height={1536}
             className="h-72 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 z-10 bg-brand-navy"
