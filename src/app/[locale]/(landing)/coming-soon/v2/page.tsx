@@ -2,11 +2,11 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import sql from "@/utils/db";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import { CopyBlock } from "../../coming-soon/components/copy-block";
-import SocialProof from "../../coming-soon/components/social-proof";
-import { CTA } from "../../coming-soon/components/cta";
+import { CopyBlock } from "../components/copy-block";
+import SocialProof from "../components/social-proof";
+import { CTA } from "../components/cta";
 
-export default async function V1({
+export default async function ComingSoonV2({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -40,9 +40,9 @@ export default async function V1({
         <MaxWidthWrapper className="text-white">
           <div className="px-1 pb-8 -mt-5">
             <div className="w-full space-y-8 bg-brand-navy/90 backdrop-blur-sm rounded-lg">
-              <CopyBlock />
-              <SocialProof count={waitlistQuery[0].count} />
-              <CTA />
+              <CopyBlock variant="v2" />
+              <SocialProof count={waitlistQuery[0].count} variant="v2" />
+              <CTA variant="v2" />
             </div>
           </div>
         </MaxWidthWrapper>
@@ -59,9 +59,9 @@ export default async function V1({
         />
         <MaxWidthWrapper className="relative z-10 text-white min-h-[calc(100vh-4rem)] flex items-center">
           <div className="w-2/5 space-y-8 bg-brand-navy/80 backdrop-blur-md p-8 rounded-lg">
-            <CopyBlock />
-            <SocialProof count={waitlistQuery[0].count} />
-            <CTA />
+            <CopyBlock variant="v2" />
+            <SocialProof count={waitlistQuery[0].count} variant="v2" />
+            <CTA variant="v2" />
           </div>
         </MaxWidthWrapper>
       </div>

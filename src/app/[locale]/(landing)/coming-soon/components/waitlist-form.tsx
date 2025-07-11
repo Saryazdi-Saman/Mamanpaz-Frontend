@@ -60,25 +60,19 @@ const validateAndFormatPostCode = (raw: string) => {
 interface WaitlistFormProps {
   setIsSuccess: Dispatch<SetStateAction<boolean>>;
   onSuccess?: (data: { message: string; referralLink?: string }) => void;
+  variant?: string;
 }
 
 export const WaitlistForm = ({
   setIsSuccess,
   onSuccess,
+  variant,
 }: WaitlistFormProps) => {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
   const pathname = usePathname();
 
-  let version = "unknown path";
-
-  if (pathname.includes("/insider")) {
-    version = "dev team";
-  } else if (pathname.includes("/v1")) {
-    version = "V1";
-  } else if (pathname.includes("/v2")) {
-    version = "V2";
-  }
+  const version = variant || "unknown";
 
   const [phoneInput, setPhoneInput] = useState("");
   const [postalCodeInput, setPostalCodeInput] = useState("");

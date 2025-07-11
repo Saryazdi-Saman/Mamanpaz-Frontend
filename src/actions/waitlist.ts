@@ -15,13 +15,13 @@ const waitlistSchema = z.object({
 });
 
 /**
- * Looks up referrer information from the 'ref' cookie
+ * Looks up referrer information from the 'referral_code' cookie
  * @returns Object with referrer_id and referrer_name, or null if not found
  */
 async function getReferrerFromCookie(): Promise<{ referrer_id: string; referrer_name: string } | null> {
   try {
     const cookieStore = await cookies();
-    const refCookie = cookieStore.get('ref');
+    const refCookie = cookieStore.get('referral_code');
     
     if (!refCookie?.value) {
       return null;

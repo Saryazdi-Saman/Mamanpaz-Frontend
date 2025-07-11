@@ -1,22 +1,30 @@
 import createMiddleware from "next-intl/middleware";
 import type { NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
-import { createComingSoonRoutingMiddleware } from "./middlewares/coming-soon-routing";
+import { createABTestMiddleware } from "./middlewares/ab-test";
+import { createReferralMiddleware } from "./middlewares/referral-tracking";
 
 const i18nMiddleware = createMiddleware(routing);
 
 export function middleware(req: NextRequest) {
-  const comingSoonRoutingMiddleware = createComingSoonRoutingMiddleware([
-    "v1",
-    // "/v2",
-    // "/v3",
+  const referralMiddleware = createReferralMiddleware({
+    paramName: 'ref',
+    cookieName: 'referral_code',
+    maxAge: 60 * 60 * 24 * 30 // 30 days
+  });
+
+  const abTestMiddleware = createABTestMiddleware([
+    {
+      src: "/",
+      destinations: ["/coming-soon/v1", "/coming-soon/v2"],
+      cookieName: "landing_variant"
+    }
   ]);
 
-  // First run the i18n middleware
+  // Middleware chain: i18n → referral → A/B test
   const i18nResponse = i18nMiddleware(req);
-
-  // Then pass the i18n response to path assignment middleware
-  const finalResponse = comingSoonRoutingMiddleware(req, i18nResponse);
+  const referralResponse = referralMiddleware(req, i18nResponse);
+  const finalResponse = abTestMiddleware(req, referralResponse);
 
   return finalResponse;
 }

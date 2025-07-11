@@ -15,7 +15,9 @@ declare const messages: {
     "subheader": "Weekly Persian meals, planned and prepared like mom would — enjoy comfort without the cooking."
   },
   "LocaleLayout": {
-    "title": "Mamanpaz meals"
+    "siteName": "Mamanpaz meals",
+    "title": "Get Early Access to Mamanpaz Meals",
+    "description": "Subscription-based Persian meals, planned and delivered"
   },
   "LocaleSwitcher": {
     "label": "Change language",

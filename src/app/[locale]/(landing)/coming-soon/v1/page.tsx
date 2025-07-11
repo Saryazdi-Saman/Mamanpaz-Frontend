@@ -6,7 +6,7 @@ import { CopyBlock } from "../components/copy-block";
 import { CTA } from "../components/cta";
 import SocialProof from "../components/social-proof";
 
-export default async function V1({
+export default async function ComingSoonV1({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -37,9 +37,9 @@ export default async function V1({
             className="w-full h-fit space-y-8 bg-brand-navy py-4 z-20 md:py-2
           md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-8 md:mt-0"
           >
-            <CopyBlock />
-            <SocialProof count={waitlistQuery[0].count} />
-            <CTA />
+            <CopyBlock variant="v1" />
+            <SocialProof count={waitlistQuery[0].count} variant="v1" />
+            <CTA variant="v1" />
           </div>
           <Image
             src="/MomSketchHero.webp"

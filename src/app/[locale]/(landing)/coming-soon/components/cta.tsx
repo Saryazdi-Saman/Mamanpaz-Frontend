@@ -14,7 +14,11 @@ import { WaitlistForm } from "./waitlist-form";
 import { WelcomeCard } from "./welcome-card";
 import { useState } from "react";
 
-export function CTA() {
+interface CTAProps {
+  variant?: string;
+}
+
+export function CTA({ variant }: CTAProps) {
   const t = useTranslations("CTA");
   const locale = useLocale();
   const pathname = usePathname();
@@ -35,15 +39,7 @@ export function CTA() {
     setSuccessData(data);
   };
 
-  let version = "unknown path";
-
-  if (pathname.includes("/insider")) {
-    version = "dev team";
-  } else if (pathname.includes("/v1")) {
-    version = "V1";
-  } else if (pathname.includes("/v2")) {
-    version = "V2";
-  }
+  const version = variant || "unknown";
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -76,7 +72,7 @@ export function CTA() {
           )}
         </DialogHeader>
         {!isSuccess ? (
-          <WaitlistForm setIsSuccess={setIsSuccess} onSuccess={handleSuccess} />
+          <WaitlistForm setIsSuccess={setIsSuccess} onSuccess={handleSuccess} variant={variant} />
         ) : (
           <WelcomeCard
             message={successData?.message}
