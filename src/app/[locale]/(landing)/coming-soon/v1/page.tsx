@@ -3,9 +3,8 @@ import sql from "@/utils/db";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { CopyBlock } from "./copy-block";
-import SocialProof from "./social-proof";
-import { WaitlistForm } from "./waitlist-form";
 import { CTA } from "./cta";
+import SocialProof from "./social-proof";
 
 export default async function V1({
   params,
@@ -35,8 +34,8 @@ export default async function V1({
         >
           <div
             data-type="copy-box"
-            className="w-full h-fit space-y-8 bg-brand-navy/30 backdrop-blur-lg py-4 md:py-2
-          md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-10 md:mt-0"
+            className="w-full h-fit space-y-8 bg-brand-navy pb-4  pt-4 md:py-2
+          md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-8 md:mt-0"
           >
             <CopyBlock />
             <SocialProof count={waitlistQuery[0].count} />

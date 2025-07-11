@@ -1,9 +1,8 @@
+import MamanpazWordmark from "@/../public/MamanpazWordmark.svg";
 import { cn } from "@/lib/utils";
 import { useLocale } from "next-intl";
 import LocaleSwitcher from "./locale-switcher";
 import { MaxWidthWrapper } from "./max-width-wrapper";
-import MamanpazIcon from "@/../public/MamanpazIcon.svg";
-import MamanpazWordmark from "@/../public/MamanpazWordmark.svg";
 
 export default function Navbar() {
   // setRequestLocale(locale)

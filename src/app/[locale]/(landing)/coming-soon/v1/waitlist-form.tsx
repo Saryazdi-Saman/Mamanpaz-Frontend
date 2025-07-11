@@ -8,7 +8,13 @@ import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
 import { Loader2Icon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { Dispatch, SetStateAction, useActionState, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useActionState,
+  useEffect,
+  useState,
+} from "react";
 
 const initialState: ActionResponse = {
   success: false,
@@ -45,20 +51,15 @@ interface WaitlistFormProps {
   onSuccess?: (data: { message: string; referralLink?: string }) => void;
 }
 
-export const WaitlistForm = ({ setIsSuccess, onSuccess }: WaitlistFormProps) => {
+export const WaitlistForm = ({
+  setIsSuccess,
+  onSuccess,
+}: WaitlistFormProps) => {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
 
   const [phoneInput, setPhoneInput] = useState("");
   const [postalCodeInput, setPostalCodeInput] = useState("");
-  const [copied, setCopied] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const copyButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const [state, action, isPending] = useActionState(
     SubmitWaitlistRequest,
@@ -77,31 +78,10 @@ export const WaitlistForm = ({ setIsSuccess, onSuccess }: WaitlistFormProps) => 
       setIsSuccess(true);
       onSuccess?.({
         message: state.message,
-        referralLink: state.referralLink
+        referralLink: state.referralLink,
       });
     }
   }, [state, setIsSuccess, onSuccess]);
-
-  const cleanUrl = (url: string) => {
-    if (!url) return "";
-    return url.replace(/^https?:\/\/(www\.)?/, "");
-  };
-
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTooltipOpen(true);
-      setTimeout(() => {
-        setCopied(false);
-        setTooltipOpen(false);
-      }, 2000);
-      // Keep focus on the button after copying
-      copyButtonRef.current?.focus();
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  };
 
 
   return (
@@ -121,7 +101,7 @@ export const WaitlistForm = ({ setIsSuccess, onSuccess }: WaitlistFormProps) => 
           maxLength={100}
           autoComplete="name"
           enterKeyHint="next"
-          className={cn( 
+          className={cn(
             "ring-brand-teal selection:text-background selection:bg-brand-teal",
             state.errors?.name ? "border-red-500 ring-red-400" : ""
           )}
