@@ -42,7 +42,7 @@ export default async function V1({
             <CTA />
           </div>
           <Image
-            src="/MomSketchHero.webp"
+            src="/MomSketchHero.png"
             alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
             priority
             width={1024}
