@@ -1,11 +1,10 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import { setRequestLocale } from "next-intl/server";
-import MomSketchHero from "@/../public/MomSketchHero.svg";
-import Image from 'next/image'
-import { CopyBlock } from "./copy-block";
-import { CTA } from "./cta";
-import SocialProof from "./social-proof";
 import sql from "@/utils/db";
+import { setRequestLocale } from "next-intl/server";
+import Image from 'next/image';
+import { CopyBlock } from "./copy-block";
+import SocialProof from "./social-proof";
+import { WaitlistForm } from "./waitlist-form";
 
 export default async function V1({
   params,
@@ -41,7 +40,7 @@ export default async function V1({
           >
             <CopyBlock />
             <SocialProof count={waitlistQuery[0].count} />
-            <CTA />
+            <WaitlistForm />
           </div>
           {/* <MomSketchHero className="h-52 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " /> */}
           <Image 
