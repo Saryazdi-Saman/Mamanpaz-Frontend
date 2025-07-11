@@ -28,7 +28,7 @@ declare const messages: {
     "phone": "Phone number",
     "phoneValidation": "Enter a 10-digit phone number",
     "success": "Welcome to the feast! We'll be in touch soon.",
-    "duplicate": "You're already on our list! We'll be in touch soon.❤️",
+    "duplicate": "You're already on our list! We'll be in touch soon.",
     "shareText": "💌 Invite friends — you both get a gift from us!",
     "copy": "Copy",
     "copied": "Copied to clipboard!",

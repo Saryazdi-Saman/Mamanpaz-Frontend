@@ -2,9 +2,9 @@ import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import sql from "@/utils/db";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import { CopyBlock } from "./copy-block";
-import { CTA } from "./cta";
-import SocialProof from "./social-proof";
+import { CopyBlock } from "../components/copy-block";
+import { CTA } from "../components/cta";
+import SocialProof from "../components/social-proof";
 
 export default async function V1({
   params,
@@ -28,7 +28,7 @@ export default async function V1({
       <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-start md:items-center">
         <div
           data-type="hero-layout"
-          className=" w-full flex flex-col-reverse items-center px-4 justify-start
+          className=" w-full flex flex-col-reverse items-center px-1 md:px-4 justify-start
           md:flex-row md:gap-16 md:justify-between md:py-4
           landscape:py-4 landscape:gap-4"
         >
@@ -42,7 +42,7 @@ export default async function V1({
             <CTA />
           </div>
           <Image
-            src="/MomSketchHero.png"
+            src="/MomSketchHero.webp"
             alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
             priority
             width={1024}

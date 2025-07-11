@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
 import { Loader2Icon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -22,23 +23,33 @@ const initialState: ActionResponse = {
 };
 
 const validateAndFormatPostCode = (raw: string) => {
+  // Remove all non-alphanumeric characters first
+  const clean = raw.replace(/[^A-Z0-9]/g, "");
   let formatted = "";
 
-  for (let i = 0; i < raw.length && formatted.length < 7; i++) {
-    const char = raw[i];
-    const pos = formatted.replace(" ", "").length; // Position ignoring space
+  for (let i = 0; i < clean.length && i < 6; i++) {
+    const char = clean[i];
 
     // Canadian postal code pattern: A1A 1A1
-    if (pos === 0 || pos === 2 || pos === 4) {
+    if (i === 0 || i === 2 || i === 4) {
       // Positions 0, 2, 4 should be letters
       if (/[A-Z]/.test(char)) {
         formatted += char;
-        if (pos === 2) formatted += " "; // Add space after A1A
+        // Add space after the first 3 characters (A1A)
+        if (i === 2 && clean.length > 3) {
+          formatted += " ";
+        }
+      } else {
+        // Invalid character at letter position, stop formatting
+        break;
       }
-    } else if (pos === 1 || pos === 3 || pos === 5) {
+    } else if (i === 1 || i === 3 || i === 5) {
       // Positions 1, 3, 5 should be digits
       if (/[0-9]/.test(char)) {
         formatted += char;
+      } else {
+        // Invalid character at digit position, stop formatting
+        break;
       }
     }
   }
@@ -57,6 +68,17 @@ export const WaitlistForm = ({
 }: WaitlistFormProps) => {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
+  const pathname = usePathname();
+
+  let version = "unknown path";
+
+  if (pathname.includes("/insider")) {
+    version = "dev team";
+  } else if (pathname.includes("/v1")) {
+    version = "V1";
+  } else if (pathname.includes("/v2")) {
+    version = "V2";
+  }
 
   const [phoneInput, setPhoneInput] = useState("");
   const [postalCodeInput, setPostalCodeInput] = useState("");
@@ -83,9 +105,9 @@ export const WaitlistForm = ({
     }
   }, [state, setIsSuccess, onSuccess]);
 
-
   return (
     <form
+      id="waitlist-form"
       action={action}
       className="w-full flex flex-col items-stretch gap-2 animate-in fade-in-0 duration-300"
       autoComplete="on"
@@ -169,7 +191,15 @@ export const WaitlistForm = ({
         </div>
       </div>
 
-      <Button size="lg" className="text-lg font-bold" disabled={isPending}>
+      <Button
+        id="submit-btn"
+        data-umami-event="Submit button"
+        data-umami-event-version={version}
+        data-umami-event-language={locale}
+        size="lg"
+        className="text-lg font-bold"
+        disabled={isPending}
+      >
         {isPending ? (
           <>
             <Loader2Icon className="animate-spin" />
