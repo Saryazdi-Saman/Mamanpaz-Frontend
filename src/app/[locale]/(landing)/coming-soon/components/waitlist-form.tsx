@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
 import { Loader2Icon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -70,7 +69,6 @@ export const WaitlistForm = ({
 }: WaitlistFormProps) => {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
-  const pathname = usePathname();
 
   const version = variant || "unknown";
 

@@ -79,13 +79,6 @@ export async function generateMetadata(
       locale: locale,
       type: 'website'
     },
-    appleWebApp: {
-      title: "Mamanpaz",
-    },
-    icons: {
-      icon: "/favicon.ico",
-      apple: "/apple-icon.png",
-    },
     robots: {
       index: true,
       follow: true,
@@ -98,6 +91,13 @@ export async function generateMetadata(
         "max-image-preview": "large",
         "max-snippet": -1,
       },
+    },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/apple-icon.png",
+    },
+    appleWebApp: {
+      title: "Mamanpaz",
     },
   };
 }
@@ -120,7 +120,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html className="h-dvh" lang={locale} dir={locale === "fa" ? "rtl" : "ltr"}>
-      <body className={`${fontClasses} ${bodyFont} antialiased tracking-wide`}>
+      <body className={`${fontClasses} ${bodyFont} antialiased tracking-wide w-lvw min-h-dvh`}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
       {/* Umami tracking script */}

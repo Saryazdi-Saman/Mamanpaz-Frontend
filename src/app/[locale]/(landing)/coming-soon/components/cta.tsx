@@ -8,11 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useTranslations, useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 import { WaitlistForm } from "./waitlist-form";
 import { WelcomeCard } from "./welcome-card";
-import { useState } from "react";
 
 interface CTAProps {
   variant?: string;
@@ -21,7 +20,6 @@ interface CTAProps {
 export function CTA({ variant }: CTAProps) {
   const t = useTranslations("CTA");
   const locale = useLocale();
-  const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);

@@ -20,7 +20,6 @@ export function createABTestMiddleware(routes: ABTestRoute[]) {
       const pathSegments = pathname.split("/").filter(Boolean);
       if (pathSegments.length === 0) return false;
       
-      const locale = pathSegments[0];
       const pathWithoutLocale = "/" + pathSegments.slice(1).join("/");
       
       // Match exact path or root path for locale

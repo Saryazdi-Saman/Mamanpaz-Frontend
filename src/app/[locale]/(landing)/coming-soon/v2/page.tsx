@@ -40,8 +40,8 @@ export default async function ComingSoonV2({
         <MaxWidthWrapper className="text-white">
           <div className="px-1 pb-8 -mt-5">
             <div className="w-full space-y-8 bg-brand-navy/90 backdrop-blur-sm rounded-lg">
-              <CopyBlock variant="v2" />
-              <SocialProof count={waitlistQuery[0].count} variant="v2" />
+              <CopyBlock />
+              <SocialProof count={waitlistQuery[0].count} />
               <CTA variant="v2" />
             </div>
           </div>
@@ -59,8 +59,8 @@ export default async function ComingSoonV2({
         />
         <MaxWidthWrapper className="relative z-10 text-white min-h-[calc(100vh-4rem)] flex items-center">
           <div className="w-2/5 space-y-8 bg-brand-navy/80 backdrop-blur-md p-8 rounded-lg">
-            <CopyBlock variant="v2" />
-            <SocialProof count={waitlistQuery[0].count} variant="v2" />
+            <CopyBlock />
+            <SocialProof count={waitlistQuery[0].count} />
             <CTA variant="v2" />
           </div>
         </MaxWidthWrapper>

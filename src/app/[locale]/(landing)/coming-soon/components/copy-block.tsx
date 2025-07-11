@@ -1,11 +1,7 @@
 import { Heading } from "@/components/heading";
 import { useLocale, useTranslations } from "next-intl";
 
-interface CopyBlockProps {
-  variant?: string;
-}
-
-export const CopyBlock = ({ variant }: CopyBlockProps) => {
+export const CopyBlock = () => {
   const t = useTranslations("PracticalCopy");
   const locale = useLocale();
 

@@ -1,7 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import {ReactNode} from 'react';
 
-export const metadat: Metadata = {
+export const viewport: Viewport = {
+  themeColor: "#1D214E"
+}
+
+export const metadata: Metadata = {
     metadataBase: new URL('https://www.mamanpazmeals.com'),
 }
 
