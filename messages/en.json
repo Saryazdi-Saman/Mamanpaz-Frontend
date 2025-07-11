@@ -19,12 +19,12 @@
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
   },
   "WaitlistForm": {
-    "button": "Join them",
+    "button": "Count Me In",
     "name": "Name",
     "postCode": "Postal code",
     "phone": "Phone number",
     "phoneValidation": "Enter a 10-digit phone number",
-    "success": "🎉 Welcome to the club! We'll be in touch soon.",
+    "success": "Welcome to the feast! We'll be in touch soon.",
     "duplicate": "You're already on our list! We'll be in touch soon.❤️",
     "shareText": "💌 Invite friends — you both get a gift from us!",
     "copy": "Copy",
@@ -45,5 +45,10 @@
   },
   "Manifest": {
     "name": "Mamanpaz Meals"
+  },
+  "CTA": {
+    "button":"Join them",
+    "dialogTitle": "Join our feasts",
+    "dialogDescription": "We will notify you with early subscriber offers as soon as we launch."
   }
 }

@@ -6,14 +6,9 @@ import { normalizeFarsiDigits } from "@/lib/normalize-farsi-digits";
 import { phoneDisplayFormat } from "@/lib/phone-display-format";
 import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
-import { useTranslations, useLocale } from "next-intl";
-import { useActionState, useEffect, useState, useRef } from "react";
-import { Loader2Icon, Copy, Check } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Loader2Icon } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Dispatch, SetStateAction, useActionState, useEffect, useRef, useState } from "react";
 
 const initialState: ActionResponse = {
   success: false,
@@ -45,7 +40,12 @@ const validateAndFormatPostCode = (raw: string) => {
   return formatted;
 };
 
-export const WaitlistForm = () => {
+interface WaitlistFormProps {
+  setIsSuccess: Dispatch<SetStateAction<boolean>>;
+  onSuccess?: (data: { message: string; referralLink?: string }) => void;
+}
+
+export const WaitlistForm = ({ setIsSuccess, onSuccess }: WaitlistFormProps) => {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
 
@@ -72,7 +72,15 @@ export const WaitlistForm = () => {
 
     const post = state.inputs?.zip ?? "";
     setPostalCodeInput(post);
-  }, [state]);
+
+    if (state.success) {
+      setIsSuccess(true);
+      onSuccess?.({
+        message: state.message,
+        referralLink: state.referralLink
+      });
+    }
+  }, [state, setIsSuccess, onSuccess]);
 
   const cleanUrl = (url: string) => {
     if (!url) return "";
@@ -95,50 +103,6 @@ export const WaitlistForm = () => {
     }
   };
 
-  // Show success message if form was submitted successfully
-  if (isClient && state.success && state.message) {
-    return (
-      <div className="w-full flex items-center justify-center min-h-[200px] bg-brand-teal rounded-sm md:px-3 p-3 animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 ease-out">
-        <div className="text-center">
-          <p className="text-xl font-medium text-foreground">
-            {t(state.message)}
-          </p>
-          {state.referralLink && (
-            <div className="mt-4 bg-muted rounded-md">
-              <p className="text-sm text-brand-navy/75 mb-2">
-                {t("shareText")}
-              </p>
-              <Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
-                <TooltipTrigger asChild>
-                  <Button
-                    type="button"
-                    id="copy-referral-link"
-                    ref={copyButtonRef}
-                    onClick={() => copyToClipboard(state.referralLink!)}
-                    className="group relative w-full text-xs bg-background p-3 rounded border break-all text-brand-navy tracking-tight hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between gap-2"
-                  >
-                    <span className="flex-1 text-left">
-                      {state.referralLink ? cleanUrl(state.referralLink) : ""}
-                    </span>
-                    <div className="flex-shrink-0">
-                      {copied ? (
-                        <Check className="w-4 h-4 text-green-600" />
-                      ) : (
-                        <Copy className="w-4 h-4 text-brand-navy/60 group-hover:text-brand-navy transition-colors" />
-                      )}
-                    </div>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-brand-navy text-background">
-                  {copied ? <p>{t("copied")}</p> : <p>{t("copy")}</p>}
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <form
@@ -157,8 +121,8 @@ export const WaitlistForm = () => {
           maxLength={100}
           autoComplete="name"
           enterKeyHint="next"
-          className={cn(
-            "ring-brand-teal selection:text-background text-background selection:bg-brand-teal",
+          className={cn( 
+            "ring-brand-teal selection:text-background selection:bg-brand-teal",
             state.errors?.name ? "border-red-500 ring-red-400" : ""
           )}
           type="text"
@@ -185,7 +149,7 @@ export const WaitlistForm = () => {
             setPostalCodeInput(formatted);
           }}
           className={cn(
-            "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+            "ring-brand-teal selection:text-background selection:bg-brand-teal",
             state.errors?.zip ? "border-red-500 ring-red-400" : ""
           )}
           type="text"
@@ -215,7 +179,7 @@ export const WaitlistForm = () => {
             setPhoneInput(phoneDisplayFormat(value)); // Store raw digits for validation
           }}
           className={cn(
-            "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+            "ring-brand-teal selection:text-backgrounds selection:bg-brand-teal",
             state.errors?.phone ? "border-red-500 ring-red-400" : "",
             locale === "fa" ? "text-right placeholder:text-right" : ""
           )}
@@ -225,7 +189,7 @@ export const WaitlistForm = () => {
         </div>
       </div>
 
-      <Button size="lg" className="text-lg font-bold h-14" disabled={isPending}>
+      <Button size="lg" className="text-lg font-bold" disabled={isPending}>
         {isPending ? (
           <>
             <Loader2Icon className="animate-spin" />

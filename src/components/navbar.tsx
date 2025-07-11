@@ -13,7 +13,7 @@ export default function Navbar() {
       <MaxWidthWrapper>
         <div
           className={cn(
-            "w-full flex h-16 items-center justify-between",
+            "w-full flex h-16 items-center justify-between px-4",
             locale === "fa" ? " flex-row-reverse" : "flex-row"
           )}
         >
@@ -23,8 +23,8 @@ export default function Navbar() {
               locale === "fa" ? " flex-row-reverse" : "flex-row"
             )}
           >
-            <MamanpazIcon className="h-full p-1 text-white md:h-12 block md:hidden" />
-            <MamanpazWordmark className="h-full text-white hidden md:h-12 md:block" />
+            {/* <MamanpazIcon className="h-full p-1 text-white md:h-12 block md:hidden" /> */}
+            <MamanpazWordmark className="h-full text-white py-2 " />
           </div>
           <LocaleSwitcher />
         </div>

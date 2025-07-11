@@ -1,10 +1,11 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import sql from "@/utils/db";
 import { setRequestLocale } from "next-intl/server";
-import Image from 'next/image';
+import Image from "next/image";
 import { CopyBlock } from "./copy-block";
 import SocialProof from "./social-proof";
 import { WaitlistForm } from "./waitlist-form";
+import { CTA } from "./cta";
 
 export default async function V1({
   params,
@@ -13,13 +14,12 @@ export default async function V1({
 }) {
   const { locale } = await params;
 
-
   const waitlistQuery = await sql`
   select count(*) + 137 as count
   from users
   `;
 
-  console.log(waitlistQuery)
+  console.log(waitlistQuery);
 
   // Enable static rendering
   setRequestLocale(locale);
@@ -35,19 +35,19 @@ export default async function V1({
         >
           <div
             data-type="copy-box"
-            className="w-full h-fit space-y-8 bg-brand-navy/10 backdrop-blur-sm  pb-2 md:py-2
-          md:w-3/5 lg:w-2/5 landscape:space-y-16"
+            className="w-full h-fit space-y-8 bg-brand-navy/30 backdrop-blur-lg py-4 md:py-2
+          md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-10 md:mt-0"
           >
             <CopyBlock />
             <SocialProof count={waitlistQuery[0].count} />
-            <WaitlistForm />
+            <CTA />
           </div>
-          <Image 
-          src='/MomSketchRealisticPlate.png'
-          alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
-          width={1024}
-          height={1536}
-          className="h-72 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " 
+          <Image
+            src="/MomSketchRealisticPlate.png"
+            alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
+            width={1024}
+            height={1536}
+            className="h-72 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 "
           />
         </div>
       </MaxWidthWrapper>
