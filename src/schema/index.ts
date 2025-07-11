@@ -12,7 +12,7 @@ export const postalCodeSchema = z
     const postalCodePattern = /^[A-Z]\d[A-Z][\s-]?\d[A-Z]\d$/;
     return postalCodePattern.test(code);
   }, {
-    error: "Invalid Canadian postal code format. Expected format: A1A 1A1 or A1A-1A1"
+    message: "invalidPostalCode"
   })
   .transform((code) => {
     // Normalize to standard format with space: A1A 1A1
@@ -24,8 +24,7 @@ export const phoneSchema = z
   .transform((input) => parsePhoneNumberFromString(normalizeFarsiDigits(input), 'CA'))
   .refine((phone) => phone?.isValid() ?? false,
     {
-      error: "Invalid Canadian phone number",
-    //   abort: true
+      message: "invalidPhone"
     }
   )
   .transform((phone) => phone!.number);
@@ -33,14 +32,14 @@ export const phoneSchema = z
 export const nameSchema = z
   .string()
   .trim()
-  .min(2, "Name must be at least 2 characters")
-  .max(100, "Name must be less than 100 characters")
+  .min(2, "nameMinLength")
+  .max(100, "nameMaxLength")
   .refine((name) => {
     // Allow letters (English, Persian, Arabic), spaces, hyphens, apostrophes
     const namePattern = /^[\u0041-\u005A\u0061-\u007A\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u200C\u200D\s\-'\.]+$/;
     return namePattern.test(name);
   }, {
-    message: "Name can only contain letters, spaces, hyphens, and apostrophes"
+    message: "invalidNameCharacters"
   })
   .transform((name) => {
     // Normalize spaces first

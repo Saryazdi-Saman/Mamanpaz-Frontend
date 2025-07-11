@@ -24,11 +24,16 @@
     "postCode": "Postal code",
     "phone": "Phone number",
     "phoneValidation": "Enter a 10-digit phone number",
-    "success": "Welcome to the waitlist! We'll be in touch soon.",
-    "duplicate": "You're already on the waitlist! We'll be in touch soon.",
-    "shareText": "Share your referral link:",
+    "success": "🎉 Welcome to the club! We'll be in touch soon.",
+    "duplicate": "You're already on our list! We'll be in touch soon.❤️",
+    "shareText": "💌 Invite friends — you both get a gift from us!",
     "copy": "Copy",
-    "copied": "Copied to clipboard!"
+    "copied": "Copied to clipboard!",
+    "nameMinLength": "Name must be at least 2 characters",
+    "nameMaxLength": "Name must be less than 100 characters", 
+    "invalidNameCharacters": "Name can only contain letters, spaces, hyphens, and apostrophes",
+    "invalidPostalCode": "Invalid Canadian postal code format. Expected format: A1A 1A1",
+    "invalidPhone": "Invalid Canadian phone number"
   },
   
   "SocialProof": {

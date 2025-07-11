@@ -6,7 +6,7 @@ import { normalizeFarsiDigits } from "@/lib/normalize-farsi-digits";
 import { phoneDisplayFormat } from "@/lib/phone-display-format";
 import { cn } from "@/lib/utils";
 import { ActionResponse } from "@/types/waitlist";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useActionState, useEffect, useState, useRef } from "react";
 import { Loader2Icon, Copy, Check } from "lucide-react";
 import {
@@ -47,6 +47,7 @@ const validateAndFormatPostCode = (raw: string) => {
 
 export const WaitlistForm = () => {
   const t = useTranslations("WaitlistForm");
+  const locale = useLocale();
 
   const [phoneInput, setPhoneInput] = useState("");
   const [postalCodeInput, setPostalCodeInput] = useState("");
@@ -74,8 +75,8 @@ export const WaitlistForm = () => {
   }, [state]);
 
   const cleanUrl = (url: string) => {
-    if (!url) return '';
-    return url.replace(/^https?:\/\/(www\.)?/, '');
+    if (!url) return "";
+    return url.replace(/^https?:\/\/(www\.)?/, "");
   };
 
   const copyToClipboard = async (text: string) => {
@@ -99,7 +100,9 @@ export const WaitlistForm = () => {
     return (
       <div className="w-full flex items-center justify-center min-h-[200px] bg-brand-teal rounded-sm md:px-3 p-3 animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 ease-out">
         <div className="text-center">
-          <p className="text-xl font-medium text-foreground">{t(state.message)}</p>
+          <p className="text-xl font-medium text-foreground">
+            {t(state.message)}
+          </p>
           {state.referralLink && (
             <div className="mt-4 bg-muted rounded-md">
               <p className="text-sm text-brand-navy/75 mb-2">
@@ -115,7 +118,7 @@ export const WaitlistForm = () => {
                     className="group relative w-full text-xs bg-background p-3 rounded border break-all text-brand-navy tracking-tight hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between gap-2"
                   >
                     <span className="flex-1 text-left">
-                      {state.referralLink ? cleanUrl(state.referralLink) : ''}
+                      {state.referralLink ? cleanUrl(state.referralLink) : ""}
                     </span>
                     <div className="flex-shrink-0">
                       {copied ? (
@@ -127,11 +130,7 @@ export const WaitlistForm = () => {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent className="bg-brand-navy text-background">
-                  {copied ? (
-                    <p>{t("copied")}</p>
-                  ) : (
-                    <p>{t("copy")}</p>
-                  )}
+                  {copied ? <p>{t("copied")}</p> : <p>{t("copy")}</p>}
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -144,72 +143,87 @@ export const WaitlistForm = () => {
   return (
     <form
       action={action}
-      className="w-full flex flex-col items-stretch gap-3 animate-in fade-in-0 duration-300"
+      className="w-full flex flex-col items-stretch gap-2 animate-in fade-in-0 duration-300"
       autoComplete="on"
     >
-      <Input
-        id="name"
-        name="name"
-        placeholder={t("name")}
-        defaultValue={state.inputs?.name}
-        required
-        minLength={2}
-        maxLength={100}
-        autoComplete="name"
-        enterKeyHint="next"
-        className={cn(
-          "ring-brand-teal selection:text-background text-background selection:bg-brand-teal",
-          state.errors?.name ? "border-red-500" : ""
-        )}
-        type="text"
-      />
+      <div>
+        <Input
+          id="name"
+          name="name"
+          placeholder={t("name")}
+          defaultValue={state.inputs?.name}
+          required
+          minLength={2}
+          maxLength={100}
+          autoComplete="name"
+          enterKeyHint="next"
+          className={cn(
+            "ring-brand-teal selection:text-background text-background selection:bg-brand-teal",
+            state.errors?.name ? "border-red-500 ring-red-400" : ""
+          )}
+          type="text"
+        />
+        <div className="text-xs text-red-500 min-h-2">
+          {state.errors?.name && t(state.errors.name[0])}
+        </div>
+      </div>
 
-      <Input
-        id="zip"
-        name="zip"
-        placeholder={t("postCode")}
-        value={postalCodeInput}
-        required
-        autoComplete="postal-code"
-        pattern="^[A-Z]\d[A-Z] \d[A-Z]\d$"
-        title="Enter a valid Canadian postal code (e.g. M5V 3A8)"
-        enterKeyHint="next"
-        onInput={(e) => {
-          const raw = e.currentTarget.value.toUpperCase();
-          const formatted = validateAndFormatPostCode(raw);
-          setPostalCodeInput(formatted);
-        }}
-        className={cn(
-          "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
-          state.errors?.zip ? "border-red-500" : ""
-        )}
-        type="text"
-      />
-
-      <Input
-        id="phone"
-        name="phone"
-        placeholder={t("phone")}
-        value={phoneInput}
-        required
-        title={t("phoneValidation")}
-        inputMode="numeric"
-        translate="no"
-        pattern="^\(\d{3}\) \d{3}-\d{4}$"
-        autoComplete="tel"
-        type="tel"
-        enterKeyHint="done"
-        onInput={(e) => {
-          const raw = e.currentTarget.value;
-          const normalized = normalizeFarsiDigits(raw); // convert farsi and arabic fonts to latin digits
-          const value = normalized.replace(/\D/g, ""); // remove all none numeric chars
-          setPhoneInput(phoneDisplayFormat(value)); // Store raw digits for validation
-        }}
-        className={cn(
-          "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
-          state.errors?.phone ? "border-red-500" : ""
-        )}
-      />
+      <div>
+        <Input
+          id="zip"
+          name="zip"
+          placeholder={t("postCode")}
+          value={postalCodeInput}
+          required
+          autoComplete="postal-code"
+          pattern="^[A-Z]\d[A-Z] \d[A-Z]\d$"
+          title="Enter a valid Canadian postal code (e.g. M5V 3A8)"
+          enterKeyHint="next"
+          onInput={(e) => {
+            const raw = e.currentTarget.value.toUpperCase();
+            const formatted = validateAndFormatPostCode(raw);
+            setPostalCodeInput(formatted);
+          }}
+          className={cn(
+            "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+            state.errors?.zip ? "border-red-500 ring-red-400" : ""
+          )}
+          type="text"
+        />
+        <div className="text-xs text-red-500 min-h-2">
+          {state.errors?.zip && t(state.errors.zip[0])}
+        </div>
+      </div>
+      <div>
+        <Input
+          id="phone"
+          name="phone"
+          placeholder={t("phone")}
+          value={phoneInput}
+          required
+          title={t("phoneValidation")}
+          inputMode="numeric"
+          translate="no"
+          pattern="^\(\d{3}\) \d{3}-\d{4}$"
+          autoComplete="tel"
+          type="tel"
+          enterKeyHint="done"
+          onInput={(e) => {
+            const raw = e.currentTarget.value;
+            const normalized = normalizeFarsiDigits(raw); // convert farsi and arabic fonts to latin digits
+            const value = normalized.replace(/\D/g, ""); // remove all none numeric chars
+            setPhoneInput(phoneDisplayFormat(value)); // Store raw digits for validation
+          }}
+          className={cn(
+            "ring-brand-teal selection:text-background  text-background selection:bg-brand-teal",
+            state.errors?.phone ? "border-red-500 ring-red-400" : "",
+            locale === "fa" ? "text-right placeholder:text-right" : ""
+          )}
+        />
+        <div className="text-xs text-red-500 min-h-2">
+          {state.errors?.phone && t(state.errors.phone[0])}
+        </div>
+      </div>
 
       <Button size="lg" className="text-lg font-bold h-14" disabled={isPending}>
         {isPending ? (

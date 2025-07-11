@@ -1,6 +1,7 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { setRequestLocale } from "next-intl/server";
 import MomSketchHero from "@/../public/MomSketchHero.svg";
+import Image from 'next/image'
 import { CopyBlock } from "./copy-block";
 import { CTA } from "./cta";
 import SocialProof from "./social-proof";
@@ -42,7 +43,14 @@ export default async function V1({
             <SocialProof count={waitlistQuery[0].count} />
             <CTA />
           </div>
-          <MomSketchHero className="h-52 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " />
+          {/* <MomSketchHero className="h-52 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " /> */}
+          <Image 
+          src='/heroLine.png'
+          alt="Sketch of a mom handing a plate of zereshk polo ba morgh to her child."
+          width={1024}
+          height={1536}
+          className="h-52 w-auto max-h-80 md:w-2/5 md:h-auto md:max-h-none landscape:min-h-48 " 
+          />
         </div>
       </MaxWidthWrapper>
     </section>
