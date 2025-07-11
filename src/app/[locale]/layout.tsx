@@ -93,8 +93,11 @@ export async function generateMetadata(
       },
     },
     icons: {
-      icon: "/favicon.ico",
-      apple: "/apple-icon.png",
+      icon: [
+        { url: "/icon1.png", sizes: "96x96", type: "image/png" },
+        { url: "/favicon.svg", type: "image/svg+xml" }
+      ],
+      apple: "/web-app-manifest-192x192.png"
     },
     appleWebApp: {
       title: "Mamanpaz",

@@ -2,7 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import {ReactNode} from 'react';
 
 export const viewport: Viewport = {
-  themeColor: "#1D214E"
+  themeColor: "#1D214E",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover"
 }
 
 export const metadata: Metadata = {
