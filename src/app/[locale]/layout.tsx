@@ -79,29 +79,6 @@ export async function generateMetadata(
       locale: locale,
       type: 'website'
     },
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
-    icons: {
-      icon: [
-        { url: "/icon1.png", sizes: "96x96", type: "image/png" },
-        { url: "/favicon.svg", type: "image/svg+xml" }
-      ],
-      apple: "/web-app-manifest-192x192.png"
-    },
-    appleWebApp: {
-      title: "Mamanpaz",
-    },
   };
 }
 
