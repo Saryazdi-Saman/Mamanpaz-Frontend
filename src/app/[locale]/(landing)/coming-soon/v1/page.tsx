@@ -1,5 +1,4 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
-import sql from "@/utils/db";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { CopyBlock } from "../components/copy-block";
