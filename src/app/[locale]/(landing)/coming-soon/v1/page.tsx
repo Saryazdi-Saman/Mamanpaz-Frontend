@@ -12,14 +12,6 @@ export default async function ComingSoonV1({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  const waitlistQuery = await sql`
-  select count(*) + 137 as count
-  from users
-  `;
-
-  console.log(waitlistQuery);
-
   // Enable static rendering
   setRequestLocale(locale);
 
@@ -28,7 +20,7 @@ export default async function ComingSoonV1({
       <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-start md:items-center">
         <div
           data-type="hero-layout"
-          className=" w-full flex flex-col-reverse items-center px-1 md:px-4 justify-start
+          className=" w-full flex flex-col-reverse items-center px-4 md:px-4 justify-start
           md:flex-row md:gap-16 md:justify-between md:py-4
           landscape:py-4 landscape:gap-4"
         >
@@ -38,7 +30,7 @@ export default async function ComingSoonV1({
           md:w-3/5 lg:w-2/5 landscape:space-y-16 -mt-8 md:mt-0"
           >
             <CopyBlock />
-            <SocialProof count={waitlistQuery[0].count} />
+            <SocialProof />
             <CTA variant="v1" />
           </div>
           <Image

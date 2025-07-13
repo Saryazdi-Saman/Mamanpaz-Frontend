@@ -1,14 +1,11 @@
 import Countdown from "./count-down";
-import UserCounter from "./user-counter";
+// import UserCounter from "./user-counter";
 
-interface SocialProofProps {
-  count: number;
-}
 
-export default function SocialProof({ count }: SocialProofProps) {
+export default function SocialProof() {
   return (
-    <div className=" w-full flex flex-row items-center justify-start">
-      <UserCounter waitlistSize={count} />
+    <div className=" w-full flex flex-row items-center justify-center md:justify-start">
+      {/* <UserCounter waitlistSize={count} /> */}
       <Countdown />
     </div>
   );

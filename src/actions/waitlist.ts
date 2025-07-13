@@ -4,7 +4,6 @@ import { generateReferralCodeFromPhone } from "@/lib/generate-referral-code";
 import { nameSchema, phoneSchema, postalCodeSchema } from "@/schema";
 import { ActionResponse } from "@/types/waitlist";
 import sql from "@/utils/db";
-import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import * as z from "zod/v4";
 
@@ -119,8 +118,6 @@ export async function SubmitWaitlistRequest(
           // Log error but don't fail the signup if message insert fails
           console.error('Failed to insert referral message:', messageError);
         }
-
-      revalidatePath("/[locale]/(landing)/coming-soon", "layout");
 
       return {
         success: true,

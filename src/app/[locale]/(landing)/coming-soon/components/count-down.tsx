@@ -18,12 +18,11 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div data-type="count-down" className="flex items-center gap-2 w-1/2">
-      <PiCallBell className="text-4xl text-white/75" />
-      <p className="text-pretty leading-4 text-sm font-lato">
-        {t("countdown")}
-        <br />
-        {t("timerFormat", { day: time.days, hour: time.hours })}
+    <div data-type="count-down" className="flex items-center gap-2 w-fit text-white/75">
+      <PiCallBell className="text-2xl" />
+      <p className="text-pretty">
+        {`${t("timerFormat", { day: time.days, hour: time.hours })} ${t("countdown")}`}
+        {/* <br /> */}
       </p>
     </div>
   );

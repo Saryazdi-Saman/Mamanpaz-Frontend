@@ -53,10 +53,14 @@ export function WelcomeCard({ referralLink, message }: WelcomeCardProps) {
   };
 
   return (
-    <div className="w-full flex items-center justify-start min-h-[150px] animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 ease-out">
+    <div className="w-full flex items-center justify-center min-h-[150px] animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 ease-out">
       <div className="text-center">
         <p className="text-xl font-medium text-foreground">
-          {message ? t(message) : t("success")}
+          {message ? t.rich(message, {
+            br: () => <br></br>
+          }) : t.rich("success", {
+            br: () => <br></br>
+          })}
         </p>
         {referralLink && (
           <div className="mt-4 bg-muted rounded-md">

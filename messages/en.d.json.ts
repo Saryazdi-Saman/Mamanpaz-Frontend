@@ -2,13 +2,9 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "HomePage": {
-    "title": "Hi from Mamanpaz",
-    "about": "Go to the about page"
-  },
   "PracticalCopy": {
-    "header": "Dinner? <nosplit>Already handled</nosplit>",
-    "subheader": "Weekly subscription based Persian meals, chef-prepared and delivered to you. <br></br>No planning, no cooking, no stress."
+    "header": "Somthing Good Is Coming...",
+    "subheader": "Personalized weekly meals — planned by our chefs and delivered to your door.<br></br>No stress. No cooking. No planning."
   },
   "EmotionalCopy": {
     "header": "Feels like home, tastes like love.",
@@ -24,14 +20,14 @@ declare const messages: {
     "locale": "{locale, select, fa {🇮🇷 فارسی} en {🇨🇦 English} other {Unknown}}"
   },
   "WaitlistForm": {
-    "button": "Count Me In",
+    "button": "Join Now",
     "name": "Name",
     "postCode": "Postal code",
     "phone": "Phone number",
     "phoneValidation": "Enter a 10-digit phone number",
-    "success": "Welcome to the feast! We'll be in touch soon.",
+    "success": "Welcome to the family!<br></br>We'll message you as soon as we launch",
     "duplicate": "You're already on our list! We'll be in touch soon.",
-    "shareText": "💌 Invite friends — you both get a gift from us!",
+    "shareText": "💌 Invite friends — and enjoy our referral discounts!",
     "copy": "Copy",
     "copied": "Copied to clipboard!",
     "nameMinLength": "Name must be at least 2 characters",
@@ -44,17 +40,17 @@ declare const messages: {
   "SocialProof": {
     "memberCount": "{count,number}",
     "members": " people are hungry",
-    "countdown": "Toronto",
+    "countdown": "until launch in Toronto",
     "hook": "There is still room for you too",
-    "timerFormat": "Launching in {day, number} days"
+    "timerFormat": "{day, number} days"
   },
   "Manifest": {
     "name": "Mamanpaz Meals"
   },
   "CTA": {
-    "button":"Join them",
-    "dialogTitle": "Join our feasts",
-    "dialogDescription": "We will notify you with early subscriber offers as soon as we launch."
+    "button":"Get Your Subscription",
+    "dialogTitle": "Registration form",
+    "dialogDescription": ""
   }
 };
 export default messages;

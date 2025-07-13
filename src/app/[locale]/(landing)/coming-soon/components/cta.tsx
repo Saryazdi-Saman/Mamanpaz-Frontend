@@ -55,15 +55,17 @@ export function CTA({ variant }: CTAProps) {
         </Button>
       </DialogTrigger>
       <DialogContent
+        dir={locale === "fa" ? "rtl" : "ltr"}
+        locale={locale}
         className={`sm:max-w-[425px] ${
           isSuccess ? "bg-brand-teal" : "bg-background"
         }`}
       >
-        <DialogHeader>
+        <DialogHeader dir={locale === "fa" ? "rtl" : "ltr"}>
           {!isSuccess ? (
             <>
-              <DialogTitle>{t("dialogTitle")}</DialogTitle>
-              <DialogDescription>{t("dialogDescription")}</DialogDescription>
+              <DialogTitle className={locale === "fa" ? "text-right" : ""}>{t("dialogTitle")}</DialogTitle>
+              <DialogDescription className={locale === "fa" ? "text-right" : ""}>{t("dialogDescription")}</DialogDescription>
             </>
           ) : (
             <DialogTitle className="text-center text-2xl">🎉 🎉 🎉</DialogTitle>

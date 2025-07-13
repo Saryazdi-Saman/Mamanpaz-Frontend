@@ -10,7 +10,7 @@ export const CopyBlock = () => {
       <div >
         {locale !== "fa" && (
           <p dir="rtl" className="font-thuluth text-3xl text-center">
-            شامو بسپار به ما
+            خبری خوش در راه است...
           </p>
         )}
         <Heading locale={locale}>
@@ -23,7 +23,7 @@ export const CopyBlock = () => {
       </div>
       <p className="text-pretty text-lg font-normal md:font-light md:tracking-wider">
         {t.rich("subheader", {
-          br: () => <span></span>,
+          br: () => <br></br>,
         })}
       </p>
     </div>
