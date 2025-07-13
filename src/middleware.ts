@@ -1,17 +1,52 @@
 import createMiddleware from "next-intl/middleware";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
 import { createABTestMiddleware } from "./middlewares/ab-test";
-import { createReferralMiddleware } from "./middlewares/referral-tracking";
 
 const i18nMiddleware = createMiddleware(routing);
 
+interface CookieOptions {
+  httpOnly?: boolean;
+  secure?: boolean;
+  sameSite?: "strict" | "lax" | "none";
+  maxAge?: number;
+  path?: string;
+}
+
 export function middleware(req: NextRequest) {
-  const referralMiddleware = createReferralMiddleware({
-    paramName: 'ref',
-    cookieName: 'referral_code',
-    maxAge: 60 * 60 * 24 * 30 // 30 days
-  });
+  // Store cookies to set later
+  const cookiesToSet: Array<{name: string, value: string, options: CookieOptions}> = [];
+  
+  // Handle referral param
+  const refParam = req.nextUrl.searchParams.get('ref');
+  if (refParam) {
+    cookiesToSet.push({
+      name: 'referral_code',
+      value: refParam,
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        path: "/"
+      }
+    });
+  }
+  
+  // Handle session cookie
+  if (!req.cookies.get('session_id')) {
+    cookiesToSet.push({
+      name: 'session_id',
+      value: crypto.randomUUID(),
+      options: {
+        httpOnly: false, // Allow client-side access for analytics
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        path: "/"
+      }
+    });
+  }
 
   const abTestMiddleware = createABTestMiddleware([
     {
@@ -21,10 +56,32 @@ export function middleware(req: NextRequest) {
     }
   ]);
 
-  // Middleware chain: i18n → referral → A/B test
+  // Middleware chain: i18n → A/B test
   const i18nResponse = i18nMiddleware(req);
-  const referralResponse = referralMiddleware(req, i18nResponse);
-  const finalResponse = abTestMiddleware(req, referralResponse);
+  let finalResponse = abTestMiddleware(req, i18nResponse);
+  
+  // Clean ref param from URL as final step
+  if (refParam) {
+    if (finalResponse.status >= 300 && finalResponse.status < 400) {
+      // Final response is a redirect, clean the redirect URL
+      const redirectLocation = finalResponse.headers.get("location");
+      if (redirectLocation) {
+        const redirectUrl = new URL(redirectLocation, req.url);
+        redirectUrl.searchParams.delete('ref');
+        finalResponse = NextResponse.redirect(redirectUrl);
+      }
+    } else {
+      // Final response is a rewrite/normal response, redirect to clean URL
+      const cleanUrl = req.nextUrl.clone();
+      cleanUrl.searchParams.delete('ref');
+      finalResponse = NextResponse.redirect(cleanUrl);
+    }
+  }
+
+  // Set all our cookies on the final response
+  cookiesToSet.forEach(cookie => {
+    finalResponse.cookies.set(cookie.name, cookie.value, cookie.options);
+  });
 
   return finalResponse;
 }

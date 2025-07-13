@@ -16,6 +16,13 @@ import {
   useState,
 } from "react";
 
+// Type definitions for Umami analytics
+interface UmamiWindow extends Window {
+  umami?: {
+    track: (eventName: string, eventData?: Record<string, string | number>) => void;
+  };
+}
+
 const initialState: ActionResponse = {
   success: false,
   message: "",
@@ -88,14 +95,60 @@ export const WaitlistForm = ({
     const post = state.inputs?.zip ?? "";
     setPostalCodeInput(post);
 
+    // Track validation errors for debugging - separate event for each field
+    if (state.errors && Object.keys(state.errors).length > 0) {
+      // Track each field error separately in analytics
+      const umami = (window as UmamiWindow).umami;
+      if (typeof window !== 'undefined' && umami) {
+        // Get session ID from cookie for tracking user journey
+        const sessionId = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('session_id='))
+          ?.split('=')[1] || 'unknown';
+
+        Object.entries(state.errors).forEach(([field, fieldErrors]) => {
+          if (fieldErrors && fieldErrors.length > 0) {
+            const errorType = fieldErrors[0]; // Use first error for the field
+            
+            // Track field-specific validation error
+            umami.track(`${field.charAt(0).toUpperCase() + field.slice(1)} Validation Error`, {
+              errorType: errorType,
+              locale: locale,
+              sessionId: sessionId
+            });
+          }
+        });
+      }
+    }
+
+    // Track failed submissions (non-success with no validation errors)
+    if (!state.success && state.message && !state.errors) {
+      const umami = (window as UmamiWindow).umami;
+      if (typeof window !== 'undefined' && umami) {
+        umami.track('Form Submission Failed', {
+          error: state.message,
+          locale: locale
+        });
+      }
+    }
+
     if (state.success) {
       setIsSuccess(true);
       onSuccess?.({
         message: state.message,
         referralLink: state.referralLink,
       });
+      
+      // Track successful submissions
+      const umami = (window as UmamiWindow).umami;
+      if (typeof window !== 'undefined' && umami) {
+        umami.track('Form Submission Success', {
+          result: state.message,
+          locale: locale
+        });
+      }
     }
-  }, [state, setIsSuccess, onSuccess]);
+  }, [state, setIsSuccess, onSuccess, locale]);
 
   return (
     <form
@@ -191,6 +244,7 @@ export const WaitlistForm = ({
         size="lg"
         className="text-lg font-bold"
         disabled={isPending}
+        type="submit"
       >
         {isPending ? (
           <>

@@ -1,37 +1,29 @@
 "use client";
-import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { usePathname } from "next/navigation";
+import { Check, Copy } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 
 interface WelcomeCardProps {
   referralLink?: string;
   message?: string;
+  variant?: string;
 }
 
-export function WelcomeCard({ referralLink, message }: WelcomeCardProps) {
+export function WelcomeCard({ referralLink, message, variant }: WelcomeCardProps) {
   const t = useTranslations("WaitlistForm");
   const locale = useLocale();
-  const pathname = usePathname();
 
   const [copied, setCopied] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
 
-  let version = "unknown path";
-
-  if (pathname.includes("/insider")) {
-    version = "dev team";
-  } else if (pathname.includes("/v1")) {
-    version = "V1";
-  } else if (pathname.includes("/v2")) {
-    version = "V2";
-  }
+  // Use passed variant as the single source of truth
+  const version = variant || "unknown";
 
   const cleanUrl = (url: string) => {
     if (!url) return "";
@@ -40,7 +32,29 @@ export function WelcomeCard({ referralLink, message }: WelcomeCardProps) {
 
   const copyToClipboard = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(text);
+      // Check if clipboard API is available
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for older browsers or non-HTTPS contexts
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        // Use deprecated execCommand with proper error handling
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (!successful) {
+          throw new Error('Fallback copy method failed');
+        }
+      }
+      
       setCopied(true);
       setTooltipOpen(true);
       setTimeout(() => {
@@ -49,6 +63,7 @@ export function WelcomeCard({ referralLink, message }: WelcomeCardProps) {
       }, 2000);
     } catch (err) {
       console.error("Failed to copy: ", err);
+      // Could show user-facing error message here if needed
     }
   };
 

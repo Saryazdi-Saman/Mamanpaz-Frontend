@@ -62,11 +62,32 @@ export async function SubmitWaitlistRequest(
     phone_display: formData.get("phone_display") as string,
   };
 
+  // Log submission attempt for debugging
+  console.log('Form submission attempt:', { 
+    phone: rawData.phone?.slice(-4), // Only log last 4 digits for privacy
+    timestamp: new Date().toISOString(),
+    hasName: !!rawData.name,
+    hasZip: !!rawData.zip
+  });
+
   try {
     // Validate the form data
     const validateData = waitlistSchema.safeParse(rawData);
 
     if (!validateData.success) {
+      // Log validation errors on server side for debugging
+      console.log('Form validation errors:', {
+        timestamp: new Date().toISOString(),
+        rawInputs: {
+          name: rawData.name,
+          phone: rawData.phone,
+          phone_display: rawData.phone_display,
+          zip: rawData.zip
+        },
+        errors: z.flattenError(validateData.error).fieldErrors,
+        zodIssues: validateData.error.issues // Detailed Zod validation issues
+      });
+      
       return {
         success: false,
         inputs: rawData,

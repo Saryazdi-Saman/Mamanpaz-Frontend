@@ -40,9 +40,9 @@ declare const messages: {
   "SocialProof": {
     "memberCount": "{count,number}",
     "members": " people are hungry",
-    "countdown": "until launch in Toronto",
     "hook": "There is still room for you too",
-    "timerFormat": "{day, number} days"
+    "launchDateLabel": "Toronto Launch date",
+    "launchDate": "September 1, 2025"
   },
   "Manifest": {
     "name": "Mamanpaz Meals"

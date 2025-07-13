@@ -1,6 +1,7 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
+import Script from "next/script";
 import { CopyBlock } from "../components/copy-block";
 import { CTA } from "../components/cta";
 import SocialProof from "../components/social-proof";
@@ -16,6 +17,9 @@ export default async function ComingSoonV1({
 
   return (
     <section className="w-full min-h-[calc(100vh-4rem)] bg-brand-navy">
+      {/* <Suspense fallback={null}>
+        <PageViewTracker title="coming soon" url={`/${locale}/v1`} />
+      </Suspense> */}
       <MaxWidthWrapper className="text-white min-h-[calc(100vh-4rem)] flex items-start md:items-center">
         <div
           data-type="hero-layout"
@@ -42,6 +46,16 @@ export default async function ComingSoonV1({
           />
         </div>
       </MaxWidthWrapper>
+
+      {/* Umami tracking script */}
+      {!!process.env.NEXT_PUBLIC_UMAMI_ID && (
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID}
+          data-tag='coming-soon-v1'
+        />
+      )}
     </section>
   );
 }

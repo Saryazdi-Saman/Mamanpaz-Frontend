@@ -1,6 +1,7 @@
 import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
+import Script from "next/script";
 import { CopyBlock } from "../components/copy-block";
 import { CTA } from "../components/cta";
 import SocialProof from "../components/social-proof";
@@ -16,6 +17,9 @@ export default async function ComingSoonV2({
 
   return (
     <section className="w-full min-h-[calc(100vh-4rem)] bg-brand-navy">
+      {/* <Suspense fallback={null}>
+        <PageViewTracker title="coming soon" url={`/${locale}/v2`} />
+      </Suspense> */}
       {/* Mobile Layout */}
       <div className="md:hidden landscape:hidden">
         <div className="relative w-full h-80 overflow-hidden">
@@ -24,6 +28,7 @@ export default async function ComingSoonV2({
             alt="A dinner table covered with persian food."
             priority
             fill
+            sizes="(max-width: 768px) 80vw, 100vw"
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-navy"></div>
@@ -46,6 +51,7 @@ export default async function ComingSoonV2({
           alt="A dinner table covered with persian food."
           priority
           fill
+          sizes="(max-width: 768px) 80vw, 100vw"
           className="object-cover object-center"
         />
         <MaxWidthWrapper className="relative z-10 text-white min-h-[calc(100vh-4rem)] flex items-center">
@@ -56,6 +62,15 @@ export default async function ComingSoonV2({
           </div>
         </MaxWidthWrapper>
       </div>
+      {/* Umami tracking script */}
+      {!!process.env.NEXT_PUBLIC_UMAMI_ID && (
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID}
+          data-tag='coming-soon-v2'
+        />
+      )}
     </section>
   );
 }

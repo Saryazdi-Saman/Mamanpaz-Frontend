@@ -36,9 +36,9 @@
   "SocialProof": {
     "memberCount": "{count,number}",
     "members": "در لیست انتظار",
-    "countdown": "تا افتتاح در تورنتو",
     "hook": "هنوز برای تو هم جا هست",
-    "timerFormat": "{day, number} روز"
+    "launchDateLabel": "تاریخ افتتاح تورنتو",
+    "launchDate": "۱ سپتامبر ۲۰۲۵"
   },
   "Manifest": {
     "name": "مامان پز"

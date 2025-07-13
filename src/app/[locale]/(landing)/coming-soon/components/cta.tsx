@@ -77,6 +77,7 @@ export function CTA({ variant }: CTAProps) {
           <WelcomeCard
             message={successData?.message}
             referralLink={successData?.referralLink}
+            variant={variant}
           />
         )}
       </DialogContent>
